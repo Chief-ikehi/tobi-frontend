@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation';
 import React from 'react';
 import Link from 'next/link';
 import Navbar from "@/components/Navbar";
+import Image from "next/image";
 
 // Define types for property
 interface Property {
@@ -94,9 +95,11 @@ const PropertyDetails = () => {
       {/* Header */}
       <header className="flex justify-between items-center py-6 border-b">
         <Link href="/" className="flex items-center">
-          <img
+          <Image
             src="https://i.ibb.co/kgb8ngMP/Logo.png"
             alt="TOBI Logo"
+            width = {80}
+            height = {80}
             className="w-10 h-10"
           />
         </Link>
@@ -119,14 +122,16 @@ const PropertyDetails = () => {
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Image Gallery */}
         <div className="lg:w-2/3 space-y-4">
-          <img src={property.image} alt={property.title} className="w-full h-96 object-cover rounded-lg"/>
+          <Image src={property.image} alt={property.title} width = {80} height = {80} className="w-full h-96 object-cover text-gray-500 rounded-lg"/>
           <div className="grid grid-cols-2 gap-4">
             {Array(4).fill(null).map((_, index) => (
               <button key={`thumbnail-${index}`} className="w-full h-28 bg-gray-200 rounded-lg">
-                <img
+                <Image
                   src={`https://via.placeholder.com/200x150?text=Thumbnail+${index + 1}`}
                   alt={`Thumbnail ${index + 1}`}
-                  className="w-full h-full object-cover rounded-lg"
+                  width = {80}
+                  height = {80}
+                  className="w-full h-full object-cover text-gray-500 rounded-lg"
                 />
               </button>
             ))}
@@ -135,15 +140,15 @@ const PropertyDetails = () => {
 
         {/* Property Info */}
         <div className="lg:w-1/3 space-y-6">
-          <h1 className="text-2xl font-semibold">{property.title}</h1>
-          <p className="text-gray-600">{property.location}</p>
+          <h1 className="text-2xl text-black font-semibold">{property.title}</h1>
+          <p className="text-black">{property.location}</p>
 
           {/* Amenities */}
           <div>
-            <h2 className="text-xl font-medium">Key Amenities</h2>
+            <h2 className="text-xl text-black font-medium">Key Amenities</h2>
             <div className="flex flex-wrap gap-2">
               {property.amenities.map((amenity, index) => (
-                <span key={index} className="bg-gray-200 px-4 py-2 rounded-full">{amenity}</span>
+                <span key={index} className="bg-white text-gray-500 font-bold rounded-full py-2 px-6 shadow-md">{amenity}</span>
               ))}
             </div>
           </div>
@@ -151,15 +156,15 @@ const PropertyDetails = () => {
           {/* Booking Section */}
           <div className="mt-8">
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-semibold">${property.price}</span>
-              <span className="text-sm text-gray-500">per night</span>
+              <span className="text-3xl text-black font-semibold">${property.price}</span>
+              <span className="text-sm text-black">per night</span>
             </div>
             <div className="mt-4">
-              <label htmlFor="check-in" className="block text-sm">Check-in:</label>
-              <input type="date" id="check-in" className="w-full p-2 border border-gray-300 rounded-md"/>
+              <label htmlFor="check-in" className="block text-black text-sm">Check-in:</label>
+              <input type="date" id="check-in" className="w-full p-2 text-gray-500 border border-gray-300 rounded-md"/>
 
-              <label htmlFor="check-out" className="block mt-4 text-sm">Check-out:</label>
-              <input type="date" id="check-out" className="w-full p-2 border border-gray-300 rounded-md"/>
+              <label htmlFor="check-out" className="block mt-4 text-black text-sm">Check-out:</label>
+              <input type="date" id="check-out" className="w-full p-2 border text-gray-500 border-gray-300 rounded-md"/>
             </div>
             <button className="w-full mt-4 py-2 bg-black text-white rounded-md">Book Now</button>
           </div>

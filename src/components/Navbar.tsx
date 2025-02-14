@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from "next/image";
 
 export default function Navbar() {
   const [mounted, setMounted] = useState(false);
@@ -40,9 +41,6 @@ export default function Navbar() {
     setMenuOpen(!menuOpen);
   };
 
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
 
   return (
     <nav id="header" className={`fixed w-full z-30 top-0 bg-white shadow ${scrolling ? 'bg-white shadow' : ''} text-white`}>
@@ -50,9 +48,11 @@ export default function Navbar() {
         {/* Logo Section */}
         <div className="pl-4 flex items-center">
           <Link href="/" aria-label="TobiFrontend Logo" className="text-decoration-none">
-            <img
+            <Image
               src="https://i.ibb.co/kgb8ngMP/Logo.png"
               alt="TobiFrontend Logo"
+              width = {80}
+              height = {80}
               className="w-20 h-auto rounded-full transition-transform duration-300 ease-in-out hover:scale-110"
             />
           </Link>

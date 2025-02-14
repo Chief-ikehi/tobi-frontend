@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Home, Settings, Heart, ChevronRight, Menu, X } from 'lucide-react';
-import Navbar from "@/app/dashboard/components/Navbar";
+import { Home, Menu, X } from 'lucide-react';
+import Link from "next/link";
 
 interface Booking {
   propertyImage: string;
@@ -42,8 +42,10 @@ export default function Dashboard() {
       {/* Header */}
       <header className="flex justify-between items-center mb-8 relative">
         <div className="flex items-center space-x-2">
-          <Home className="w-6 text-blue-800 h-6" />
-          <span className="text-xl text-blue-800 font-semibold">TOBI</span>
+          <Home className="w-6 text-blue-800 h-6" href = "/" />
+          <span className="text-xl text-blue-800 font-semibold">
+          <Link href = "/" > TOBI </Link>
+          </span>
         </div>
 
         {/* Hamburger Menu Button - Only visible on mobile/tablet */}
