@@ -16,7 +16,7 @@ const Header = () => {
 
   // Sticky menu
   const handleStickyMenu = () => {
-    if (window.scrollY >= 80) {
+    if (window.scrollY >= 20) {
       setStickyMenu(true);
     } else {
       setStickyMenu(false);
@@ -26,6 +26,11 @@ const Header = () => {
   useEffect(() => {
     window.addEventListener("scroll", handleStickyMenu);
   });
+
+  // Close navigation when any link is clicked
+  const handleLinkClick = () => {
+    setNavigationOpen(false); // Close the menu when a link is clicked
+  };
 
   return (
     <header
@@ -37,7 +42,7 @@ const Header = () => {
     >
       <div className="relative mx-auto max-w-c-1390 items-center justify-between px-4 md:px-8 xl:flex 2xl:px-0">
         <div className="flex w-full items-center justify-between xl:w-1/4">
-          <a href="/">
+          <Link href="/">
             <Image
               src="/images/logo/tobi-logo-dark.svg"
               alt="logo"
@@ -52,9 +57,9 @@ const Header = () => {
               height={30}
               className="w-full dark:hidden transition-transform duration-300 ease-in-out hover:scale-110"
             />
-          </a>
+          </Link>
 
-          {/* <!-- Hamburger Toggle BTN --> */}
+          {/* Hamburger Toggle BTN */}
           <button
             aria-label="hamburger Toggler"
             className="block xl:hidden"
@@ -92,14 +97,14 @@ const Header = () => {
               </span>
             </span>
           </button>
-          {/* <!-- Hamburger Toggle BTN --> */}
+          {/* Hamburger Toggle BTN */}
         </div>
 
-        {/* Nav Menu Start   */}
+        {/* Nav Menu Start */}
         <div
           className={`invisible h-0 w-full items-center justify-between xl:visible xl:flex xl:h-auto xl:w-full ${
             navigationOpen &&
-            "navbar !visible mt-4 h-auto max-h-[400px] rounded-md bg-white p-7.5 shadow-solid-5 dark:bg-blacksection xl:h-auto xl:p-0 xl:shadow-none xl:dark:bg-transparent"
+            "navbar !visible mt-4 h-auto max-h-[400px] transition-all duration-300 ease-in-out rounded-md bg-white p-7.5 shadow-solid-5 dark:bg-blacksection xl:h-auto xl:p-0 xl:shadow-none xl:dark:bg-transparent"
           }`}
         >
           <nav>
@@ -129,7 +134,9 @@ const Header = () => {
                       >
                         {menuItem.submenu.map((item, key) => (
                           <li key={key} className="hover:text-primary">
-                            <Link href={item.path || "#"}>{item.title}</Link>
+                            <Link href={item.path || "#"} onClick={handleLinkClick}>
+                              {item.title}
+                            </Link>
                           </li>
                         ))}
                       </ul>
@@ -142,6 +149,7 @@ const Header = () => {
                           ? "text-primary hover:text-primary"
                           : "hover:text-primary"
                       }
+                      onClick={handleLinkClick} // Close the menu on link click
                     >
                       {menuItem.title}
                     </Link>
@@ -157,13 +165,15 @@ const Header = () => {
             <Link
               href="/auth/signin"
               className="text-regular font-medium text-waterloo hover:text-primary"
+              onClick={handleLinkClick} // Close the menu on button click
             >
               Sign In
             </Link>
 
             <Link
-              href="/dashboard"
+              href="/auth/signup"
               className="flex items-center justify-center rounded-full bg-primary px-7.5 py-2.5 text-regular text-white duration-300 ease-in-out hover:bg-primaryho"
+              onClick={handleLinkClick} // Close the menu on button click
             >
               Sign Up
             </Link>
@@ -173,7 +183,5 @@ const Header = () => {
     </header>
   );
 };
-
-// w-full delay-300
 
 export default Header;

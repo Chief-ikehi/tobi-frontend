@@ -1,6 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
-import { Twitter, Facebook, Instagram } from 'lucide-react';
+//import { Twitter, Facebook, Instagram } from 'lucide-react';
 
 interface TestimonialProps {
   quote: string;

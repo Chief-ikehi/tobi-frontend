@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-
+import Link from 'next/link';
 import { toast } from "react-hot-toast";
 
 const Footer = () => {
@@ -49,7 +49,7 @@ const Footer = () => {
                 viewport={{ once: true }}
                 className="animate_top w-1/2 lg:w-1/4"
               >
-                <a href="/" className="relative">
+                <Link href="/" className="relative">
                   <Image
                     width={110}
                     height={80}
@@ -64,7 +64,7 @@ const Footer = () => {
                     alt="Logo"
                     className="hidden dark:block transition-transform duration-300 ease-in-out hover:scale-110"
                   />
-                </a>
+                </Link>
 
                 <p className="mb-10 mt-5">
                   The One Bedroom Institute.
