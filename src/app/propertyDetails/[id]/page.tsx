@@ -3,7 +3,6 @@
 import { useParams } from 'next/navigation';
 import React from 'react';
 import Link from 'next/link';
-import Navbar from "@/components/Navbar";
 import Image from "next/image";
 
 // Define types for property
@@ -87,11 +86,10 @@ const PropertyDetails = () => {
   }
 
   return (
-      <div>
-        <Navbar />
+      <>
 
-
-    <div className="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+      <div className="pt-24">
+      <div className="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       {/* Header */}
       <header className="flex justify-between items-center py-6 border-b">
         <Link href="/" className="flex items-center">
@@ -170,35 +168,9 @@ const PropertyDetails = () => {
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="mt-12 py-6 border-t">
-        <div className="flex justify-between items-center">
-          <div className="flex gap-4">
-            <Link href="#" className="text-sm text-gray-500 hover:text-black">FAQs</Link>
-            <Link href="#" className="text-sm text-gray-500 hover:text-black">Contact</Link>
-            <Link href="#" className="text-sm text-gray-500 hover:text-black">Privacy Policy</Link>
-            <Link href="#" className="text-sm text-gray-500 hover:text-black">Terms & Conditions</Link>
-          </div>
-          <div className="flex gap-4">
-            <button className="text-xl text-blue-600"> 𝕏
-            </button>
-            <button className="text-xl text-blue-600">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="#4267b2"
-            >
-              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-            </svg>
-            </button>
-          </div>
-        </div>
-      </footer>
     </div>
     </div>
+    </>
   );
 };
 

@@ -1,14 +1,21 @@
-"use client";
+import { Metadata } from "next";
 import Navbar from "@/components/Navbar";
+//import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import FeaturedProperties from "@/components/FeaturedProperties";
 
+export const metadata: Metadata = {
+  title: "TOBI | The One Bedroom Institute",
+
+  // other metadata
+  description: "Find and book one-bedroom apartments easily"
+};
+
 export default function Home() {
   return (
-      <div className = "bg-white">
-      <Navbar />
+      <main>
       <Hero />
       <FeaturedProperties />
-      </div>
+      </main>
   );
 }

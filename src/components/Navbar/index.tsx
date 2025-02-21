@@ -10,8 +10,12 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false); // State to manage mobile menu
   const router = useRouter();
 
-  const handleGoToDashboard = () => {
+  const handleGoToSignin = () => {
     router.push('/auth/signin');
+    };
+
+  const handleGoToRegister = () => {
+    router.push('/dashboard');
     };
 
   // Ensures component is mounted on the client
@@ -99,7 +103,7 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="mr-3">
-              <Link className="inline-block text-black no-underline hover:text-gray-800 hover:underline py-2 px-4" href="#">
+              <Link className="inline-block text-black no-underline hover:text-gray-800 hover:underline py-2 px-4" href="/membership">
                 Private Members
               </Link>
             </li>
@@ -116,11 +120,11 @@ export default function Navbar() {
           </ul>
 
           {/* Auth Buttons */}
-          <button onClick={handleGoToDashboard} className="bg-white text-gray-800 font-bold rounded-full py-2 px-6 shadow-md hover:bg-gray-100 transform transition hover:scale-105 duration-300 ease-in-out">
+          <button onClick={handleGoToSignin} className="bg-white text-gray-800 font-bold rounded-full py-2 px-6 shadow-md hover:bg-gray-100 transform transition hover:scale-105 duration-300 ease-in-out">
             Sign In
           </button>
-          <button className="bg-black text-white font-bold rounded-full py-2 px-6 shadow-md hover:bg-blue-900 transform transition hover:scale-105 duration-300 ease-in-out">
-            <Link href="/dashboard">Register</Link>
+          <button onClick={handleGoToRegister} className="bg-black text-white font-bold rounded-full py-2 px-6 shadow-md hover:bg-blue-900 transform transition hover:scale-105 duration-300 ease-in-out">
+            Register
           </button>
         </div>
 
@@ -130,16 +134,16 @@ export default function Navbar() {
           <li><Link href="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
           <li><Link href="/" onClick={() => setMenuOpen(false)}>About Us</Link></li>
           <li><Link href="/" onClick={() => setMenuOpen(false)}>Contact</Link></li>
-          <li><Link href="/" onClick={() => setMenuOpen(false)}>Private Members</Link></li>
+          <li><Link href="/membership" onClick={() => setMenuOpen(false)}>Private Members</Link></li>
           <li><Link href="/" onClick={() => setMenuOpen(false)}>Investor Portal</Link></li>
         </ul>
 
           {/* Auth Buttons for Mobile */}
-          <button onClick={() => setMenuOpen(false)} className="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-            <Link href="/">Sign In</Link>
+          <button onClick={() => setMenuOpen(false), handleGoToSignin} className="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+            Sign In
           </button>
-          <button onClick={() => setMenuOpen(false)} className="mx-auto lg:mx-0 hover:underline bg-black text-white font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-            <Link href="/">Register</Link>
+          <button onClick={() => setMenuOpen(false), handleGoToRegister} className="mx-auto lg:mx-0 hover:underline bg-black text-white font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+            Register
           </button>
         </div>
       </div>
