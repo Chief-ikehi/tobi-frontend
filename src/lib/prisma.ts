@@ -1,10 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-declare global {
-  var prisma: PrismaClient | undefined;
-}
-
-// Use global instance to avoid multiple PrismaClient instances in development
+// No need to declare global here, as it's done in global.d.ts
 const prisma = global.prisma || new PrismaClient();
 
 if (process.env.NODE_ENV !== "production") {
