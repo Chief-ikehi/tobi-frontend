@@ -1,4 +1,4 @@
-import Signin from "@/components/Auth/SignIn";
+import Signin from '@/components/Auth/SignIn';
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,10 +8,6 @@ export const metadata: Metadata = {
   description: "This is Login page for TOBI"
 };
 
-export default function SigninPage() {
-  return (
-    <>
-      <Signin />
-    </>
-  );
+export default function SignInPage() {
+  return <Signin />;
 }

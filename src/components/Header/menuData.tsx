@@ -1,4 +1,10 @@
-import { Menu } from "@/types/menu";
+interface Menu {
+  id: number;
+  title: string;
+  newTab: boolean;
+  path: string;
+  submenu?: Menu[];
+}
 
 const menuData: Menu[] = [
   {
@@ -23,14 +29,33 @@ const menuData: Menu[] = [
     id: 4,
     title: "Private Members",
     newTab: false,
-    path: "/membership",
+    path: "/private-members",
+  },
+  {
+    id: 5,
+    title: "Investor Portal",
+    newTab: false,
+    path: "/investor-portal",
+    /*submenu: [
+      {
+          id: 61,
+          title: "Investment Directory",
+          newTab: false,
+          path: "/investor-portal/investment-directory" },
+
+      {
+          id: 62,
+          title: "Property Analysis:",
+          newTab: false,
+      path: "/investor-portal/dashboard" },
+    ],*/
   },
   {
     id: 6,
-    title: "Investor Portal",
+    title: "Agent Portal",
     newTab: false,
-    path: "/investorPortal",
-  },
+    path: "/agent-portal",
+  },/*
   {
     id: 7,
     title: "Pages",
@@ -43,13 +68,13 @@ const menuData: Menu[] = [
         path: "/dashboard",
       },
       {
-        id: 34,
+        id: 32,
         title: "Sign In",
         newTab: false,
         path: "/auth/signin",
       },
       {
-        id: 35,
+        id: 33,
         title: "Sign Up",
         newTab: false,
         path: "/auth/signup",
@@ -61,7 +86,7 @@ const menuData: Menu[] = [
         path: "/error",
       },
     ],
-  },
+  },*/
 
 ];
 

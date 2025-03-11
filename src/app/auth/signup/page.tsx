@@ -1,4 +1,4 @@
-import Signup from "@/components/Auth/SignUp";
+import Signup from '@/components/Auth/SignUp';
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,10 +8,6 @@ export const metadata: Metadata = {
   description: "This is Sign Up page for TOBI"
 };
 
-export default function Register() {
-  return (
-    <>
-      <Signup />
-    </>
-  );
+export default function SignUpPage() {
+  return <Signup />;
 }

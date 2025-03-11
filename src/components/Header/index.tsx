@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
@@ -11,8 +13,18 @@ const Header = () => {
   const [navigationOpen, setNavigationOpen] = useState(false);
   const [dropdownToggler, setDropdownToggler] = useState(false);
   const [stickyMenu, setStickyMenu] = useState(false);
+  const router = useRouter();
+
+  const signinButton = async () => {
+      router.push("/auth/signin"); // Redirect to dashboard or wherever needed
+  };
+
+  const signupButton = async () => {
+      router.push("/auth/signup"); // Redirect to dashboard or wherever needed
+  };
 
   const pathUrl = usePathname();
+  const { data: session } = useSession();
 
   // Sticky menu
   const handleStickyMenu = () => {
@@ -25,19 +37,70 @@ const Header = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleStickyMenu);
-  });
+    return () => window.removeEventListener("scroll", handleStickyMenu);
+  }, []);
 
   // Close navigation when any link is clicked
   const handleLinkClick = () => {
-    setNavigationOpen(false); // Close the menu when a link is clicked
+    setNavigationOpen(false);
+    setDropdownToggler(false);
+  };
+
+  const isActive = (path: string) => pathUrl === path;
+
+  const AuthButtons = () => {
+    if (session) {
+      return (
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+          <Link href = "/dashboard">
+            <Image
+              src={session.user?.image || "/globe.svg"}
+              alt="User Avatar"
+              width={32}
+              height={32}
+              className="rounded-full transition-transform duration-300 ease-in-out hover:scale-110"
+            />
+            </Link>
+            <Link href = "/dashboard">
+            <p className="text-sm">{session.user?.name}</p>
+            </Link>
+
+          </div>
+          <button
+            onClick={() => signOut()}
+            className="rounded-full bg-red-500 px-4 py-2 text-sm text-white hover:bg-red-800"
+          >
+            Sign Out
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <div className="flex items-center gap-4">
+        <button
+          onClick={signinButton}
+          className="text-regular text-waterloo hover:text-primary"
+        >
+          Sign In
+        </button>
+        <button
+          onClick={signupButton}
+          className="rounded-full bg-primary px-4 py-2 text-regular text-white hover:bg-primaryho"
+        >
+          Sign Up
+        </button>
+      </div>
+    );
   };
 
   return (
     <header
-      className={`fixed left-0 top-0 z-50 w-full delay-300 py-7 ${
+      className={`fixed left-0 top-0 z-50 w-full transition-all duration-300 ${
         stickyMenu
-          ? "bg-white !py-4 shadow transition duration-100 dark:bg-black"
-          : ""
+          ? "bg-white !py-4 shadow-md dark:bg-black"
+          : "bg-transparent py-7"
       }`}
     >
       <div className="relative mx-auto max-w-c-1390 items-center justify-between px-4 md:px-8 xl:flex 2xl:px-0">
@@ -61,7 +124,7 @@ const Header = () => {
 
           {/* Hamburger Toggle BTN */}
           <button
-            aria-label="hamburger Toggler"
+            aria-label="Toggle navigation menu"
             className="block xl:hidden"
             onClick={() => setNavigationOpen(!navigationOpen)}
           >
@@ -97,7 +160,6 @@ const Header = () => {
               </span>
             </span>
           </button>
-          {/* Hamburger Toggle BTN */}
         </div>
 
         {/* Nav Menu Start */}
@@ -130,9 +192,11 @@ const Header = () => {
                       </button>
 
                       <ul
-                        className={`dropdown ${dropdownToggler ? "flex" : ""}`}
+                        className={`dropdown ${
+                          dropdownToggler ? "flex" : "hidden"
+                        } absolute left-0 top-full mt-2 space-y-2 rounded-md bg-white p-4 shadow-lg dark:bg-black`}
                       >
-                        {menuItem.submenu.map((item, key) => (
+                        {menuItem.submenu.map((item: { path: string; title: string }, key: number) => (
                           <li key={key} className="hover:text-primary">
                             <Link href={item.path || "#"} onClick={handleLinkClick}>
                               {item.title}
@@ -145,11 +209,11 @@ const Header = () => {
                     <Link
                       href={`${menuItem.path}`}
                       className={
-                        pathUrl === menuItem.path
+                        isActive(menuItem.path)
                           ? "text-primary hover:text-primary"
                           : "hover:text-primary"
                       }
-                      onClick={handleLinkClick} // Close the menu on link click
+                      onClick={handleLinkClick}
                     >
                       {menuItem.title}
                     </Link>
@@ -161,22 +225,7 @@ const Header = () => {
 
           <div className="mt-7 flex items-center gap-6 xl:mt-0">
             <ThemeToggler />
-
-            <Link
-              href="/auth/signin"
-              className="text-regular font-medium text-waterloo hover:text-primary"
-              onClick={handleLinkClick} // Close the menu on button click
-            >
-              Sign In
-            </Link>
-
-            <Link
-              href="/auth/signup"
-              className="flex items-center justify-center rounded-full bg-primary px-7.5 py-2.5 text-regular text-white duration-300 ease-in-out hover:bg-primaryho"
-              onClick={handleLinkClick} // Close the menu on button click
-            >
-              Sign Up
-            </Link>
+            <AuthButtons />
           </div>
         </div>
       </div>
