@@ -1,613 +1,84 @@
-T-O-B-I is designed to provide an easy and efficient experience for both customers seeking one-bedroom accommodations and investors looking to explore high￾yield property opportunities. Below is a breakdown of the user journey for both groups.
-Customer Journey: Booking a One-Bedroom Stay
-1. Homepage Experience
-• Users arrive at the homepage, where a search bar is immediately visible.
-• The user can input their desired location.
-• Featured properties are displayed in a carousel to provide inspiration and 
-quick access to popular listings in premium locations (Ikoyi and Victoria 
-Island).
-· Option to sign up or log in using Google for repeat customers.
-2. Search and Property Discovery
-• Search Results: Users are presented with a list of matching properties in their 
-preferred location.
-·  Filters enable narrowing results based on criteria such as price, amenities, 
-and proximity to key locations such as places to visit.
-• Property Details: Each property listing includes:
-·  High-resolution images.
-·  A virtual tour option in video format.
-·  A detailed list of amenities and safety ratings.
-3. Booking Process
-• Property Selection: Users select a property, choose available dates, and 
-review room details.
-• Reservation Process:
-·  An option is provided for users to sign up or log in using Google, enabling a 
-seamless experience for repeat customers.
-·  Users input personal details and select additional services, if applicable.
-·  A cost breakdown is displayed, providing complete transparency.
-·  Payment methods(Flutterwave/Bank Transfer) are provided for secure 
-transactions, accommodating multiple currencies.
-• Confirmation: Upon completion, users receive instant booking confirmation 
-via email or SMS, with an option to add the booking to their personal 
-calendar.
-4. Post-Booking Management
-Page 2 of 17
-• User Dashboard:
-• Users can view current and past bookings.
-• Options include modifying reservations, saving favorite properties, and 
-accessing personalized recommendations.
-Private Members Program
-Exclusive Subscription Option:
-• Dedicated tab for private members with premium benefits.
-• Newsletters providing insider updates on new properties and market insights.
-• Early access to newly listed properties before public release.
-• Guaranteed property booking within 30 minutes of selection.
-• Comprehensive 24-hour service throughout check-in and check-out periods.
-• Complimentary car hiring service with airport pick-up and drop-off.
-• Personalized concierge support for members
-Investor Journey: Exploring Property Investment Opportunities
-1. Investor Portal Landing Page
-• Dedicated section for investors.
-• Includes sections for "What We Do" and "How to Partner With Us."
-• Users can create an account for investment purposes.
-• Overview of investment opportunities, including time-bound property listings.
-2. Investment Discovery
-• Investment Directory:
-• Properties are organized by investment stage, location, ROI potential, and 
-investment timeline.
-• Filters enable tailored searches.
-• Detailed Property Analysis:
-· Comprehensive financial metrics, including:
-o Expected returns based on a 70% occupancy rate.
-o Market trends.
-o Neighborhood safety.
-· Detailed data for each property, including proximity to attractions and 
-estimated returns.
-3. Investment Evaluation
-1. ROI Calculator:
-• Automatic calculator to estimate returns.
-Page 3 of 17
-• Users input investment amounts (e.g., ₦20M) and see projected returns (e.g., 
-₦32M).
-• Monthly cash flow estimates are calculated.
-2. Due Diligence:
-• Access detailed property documents.
-• Schedule virtual or in-person property walkthroughs.
-• A calendar for each building allows investors to book viewings.
-• Direct communication with investment advisors is available.
-4. Investment Commitment
-• Final Steps:
-• Investors review detailed investment terms and conditions.
-• Go through a secure payment process.
-• Instant confirmation is provided upon completion.
-• Portfolio Management:
-• The investor dashboard tracks portfolio performance, current investments, 
-and relevant market updates.
-• Access wallet if preferred to track funds and transactions.
-• Tools are provided for reinvestment or divestment decisions.
-Key Features of TOBI
-The platform is designed with the following priorities:
-• Comprehensive Real Estate Solutions:
-• TOBI provides customers with an all-in-one platform for finding secure, 
-luxurious apartments close to key attractions.
-• Investors gain access to transparent, data-driven tools for portfolio growth.
-• Seamless Navigation and Features:
-• Intuitive design for both customers and investors.
-• Real-time communication and booking capabilities.
-• Shared features, such as calendars for scheduling and secure payment 
-gateways.
-1. Homepage
-Purpose: Introduce users to TOBI and guide them to their respective journeys 
-(Customer or Investor).
-Key Elements:
-• Hero Section:
-◦ Large search bar for customers to input their desired location.
-◦ Two prominent buttons: "Find a Stay" (for customers) and "Explore 
-Investments" (for investors).
-◦ Carousel of featured properties in premium locations (Ikoyi and Victoria 
-Island).
-Page 4 of 17
-• Navigation Bar:
-◦ Logo (top left).
-◦ Links: Home, About Us, Contact, Private Members Program, Investor 
-Portal.
-◦ "Sign Up / Log In" button (top right) with Google login option.
-• Footer:
-◦ Quick links, social media icons, contact information, and newsletter 
-signup.
-Customer Journey: Booking a One-Bedroom Stay
-Screen 1: Search Results Page
-Wireframe Description:
-1. Header Section:
-◦ Sticky search bar at the top for easy modifications (e.g., destination, 
-check-in/check-out dates, number of guests).
-2. Filters Sidebar:
-◦ Options for price range, amenities (Wi-Fi, pool, gym), proximity to 
-attractions, and guest reviews.
-3. Property Listings:
-◦ Thumbnail image.
-◦ Property name and location.
-◦ Price per night.
-◦ Key amenities (e.g., Wi-Fi, kitchen, parking).
-◦ "View Details" button for each property.
-4. Sorting Options:
-◦ Dropdown to sort by price, rating, or popularity.
-5. Footer:
-◦ Pagination or "Load More" button.
-Screen 2: Property Details Page
-Wireframe Description:
-1. Image Gallery:
-◦ High-resolution images with carousel navigation.
-◦ Optional embedded video or 360° virtual tour.
-2. Property Information:
-◦ Title and location.
-◦ Description of the property.
-◦ Safety ratings displayed prominently.
-3. Amenities Section:
-◦ Icons and descriptions of amenities (e.g., air conditioning, washing 
-machine, pet-friendly).
-4. Booking Widget:
-◦ Interactive calendar for selecting dates.
-Page 5 of 17
-◦ Price breakdown with total cost.
-◦ "Book Now" button.
-5. Guest Reviews:
-◦ User-generated content with ratings and comments.
-6. Footer:
-◦ Links to related properties or FAQs.
-Screen 3: Booking Confirmation Page
-Wireframe Description:
-1. Header Section:
-◦ Confirmation message: "Booking Successful!"
-2. Booking Summary:
-◦ Dates of stay.
-◦ Property name, thumbnail image, and location.
-◦ Total cost with breakdown.
-3. Guest Information Form:
-◦ Fields for name, contact details, and special requests (e.g., dietary 
-restrictions).
-4. Payment Options:
-◦ Flutterwave or bank transfer.
-◦ Currency options (Naira, Dollar, Euro, Pound).
-5. Footer Section:
-◦ Options to download a PDF confirmation or add the booking to a 
-calendar.
-Screen 4: User Dashboard
-Wireframe Description:
-Upgrade to private membership option
-Contact a handy man
-Contact your agent via text on the platform
-1. Header Navigation:
-◦ User profile icon with dropdown.
-◦ Links: "Dashboard," "Bookings," "Favorites," "Settings."
-2. Current Bookings Section:
-◦ List of active reservations with options to modify or cancel.
-3. Past Bookings Section:
-◦ History of completed stays, with an option to rebook.
-4. Favorites Section:
-◦ List of saved properties with "View Details" and "Book Now" buttons.
-5. Personalized Recommendations Section:
-◦ AI-powered suggestions based on past bookings or searches.
-6. Footer:
-◦ Support contact details and FAQs.
-Page 6 of 17
-Mobile Considerations:
-• Search bar and filters as a collapsible dropdown for space efficiency.
-• Sticky "Book Now" button on the property details page.
-• Dashboard sections in a scrollable format for easy navigation.
-3. Private Members Program
-Screen 1: Private Members Landing Page
-Wireframe Description:
-1. Header Section:
-◦ Logo on the left.
-◦ Navigation links: "Home," "Properties," "About Us," "Contact."
-◦ Prominent "Join Now" button.
-2. Hero Section:
-◦ Large, high-quality background image/video of a luxury property.
-◦ Title: "Welcome to the Exclusive Private Members Program."
-◦ Subtitle: "Luxury, Convenience, and Priority Access Awaits You."
-◦ Call-to-Action Button: "Join Now" (scrolls to pricing or registration).
-3. Benefits List (Three Columns):
-◦ Column 1: "Early Access" - Icon of a calendar with a checkmark.
-◦ Column 2: "Concierge Support" - Icon of a headset.
-◦ Column 3: "Guaranteed Bookings" - Icon of a clock with a checkmark.
-4. Testimonials Section:
-◦ Carousel or grid layout with quotes and images of satisfied members.
-◦ Optional video testimonial.
-5. Pricing Section:
-◦ Three Membership Tiers (e.g., Basic, Premium, Elite).
-◦ Each tier with its price, benefits summary, and "Join Now" button.
-6. Footer:
-◦ Social media icons.
-◦ Quick links (FAQ, Privacy Policy, Terms of Service).
-Screen 2: Member Dashboard
-Wireframe Description:
-1. Header Navigation:
-◦ Logo.
-◦ Menu links: "Dashboard," "Bookings," "Concierge," "Account Settings."
-◦ User profile icon (with a dropdown menu).
-2. Dashboard Overview:
-◦ Welcome Message: "Welcome, [Name]! Here’s what’s new for you."
-◦ Quick Access Tiles:
-▪ Tile 1: "New Properties" - Icon of a house.
-▪ Tile 2: "Upcoming Bookings" - Icon of a calendar.
-Page 7 of 17
-▪ Tile 3: "Concierge Services" - Icon of a headset.
-3. Insider Updates Section:
-◦ Dedicated feed showing:
-▪ Newsletter updates.
-▪ Alerts for newly listed properties (with "Book Now" buttons).
-4. Booking Management Section:
-◦ List of current and past bookings.
-◦ "Book a Property" button (with a timer if within the 30-minute 
-guaranteed window).
-5. Concierge Support Hub:
-◦ Chat Interface: Text chat with a concierge.
-◦ Quick Links: Buttons for popular requests like car hire or room upgrades.
-6. Car Hiring Service Section:
-◦ Pre-arrival and during-stay options.
-◦ Dropdown for selecting vehicle type and date/time.
-◦ "Confirm Booking" button.
-7. Footer:
-◦ Support contact details.
-◦ "Feedback" button to gather member insights.
-Mobile Considerations:
-• Ensure a single-column layout for mobile screens.
-• Sticky "Join Now" button on the landing page.
-• Member Dashboard should have collapsible menus for easier navigation.
-4. Investor Journey: Exploring Property Investment Opportunities
-Screen 1: Investor Portal Landing Page
-Purpose: Introduce investors to TOBI's offerings.
-Key Elements:
-• Overview Section: "What We Do" and "How to Partner With Us."
-• Investment Opportunities: Highlighted properties with ROI potential.
-• Call-to-Action: "Create Account" or "Log In."
-Screen 2: Investment Directory
-Purpose: Help investors discover properties.
-Key Elements:
-• Filters: By location, ROI, investment stage, and timeline.
-• Property Cards: Thumbnail, location, expected returns, and "View Details" 
-button.
-• Sorting Options: By ROI, price, or timeline.
-Page 8 of 17
-Screen 3: Property Analysis Page
-Purpose: Provide detailed financial and market insights.
-Key Elements:
-• Financial Metrics: Expected returns, occupancy rates, and cash flow 
-estimates.
-• Market Trends: Graphs and data visualizations.
-• Documents Section: Legal and property documents for due diligence.
-• ROI Calculator: Interactive tool for estimating returns.
-• Call-to-Action: "Schedule a Viewing" or "Contact Advisor."
-Screen 4: Investment Commitment Page
-Purpose: Finalize the investment process.
-Key Elements:
-• Investment Summary: Property details, terms, and conditions.
-• Payment Gateway: Secure transaction options.
-• Confirmation Message: "Investment Successful" with access to portfolio.
-Screen 5: Investor Dashboard
-Purpose: Track and manage investments.
-Key Elements:
-• Portfolio Overview: Current investments and performance metrics.
-• Market Updates: Relevant news and trends.
-• Wallet: Track funds and transactions.
-• Reinvestment Options: Tools for making new investment decisions.
-Key Features Across All Screens
-• Responsive Design: Optimized for desktop, tablet, and mobile.
-• Real-Time Communication: Chat or call options for customer and investor 
-support.
-• Secure Payments: Integration with Flutterwave and bank transfer options.
-• Shared Calendars: For booking stays or scheduling property viewings.
-Wireframe Sketches
-Investor Portal Landing Page:
-• Hero section with a brief overview and "Create Account"/"Log In" buttons.
-• Highlighted properties with ROI potential below the fold.
-Investment Directory:
-• Filters on the left-hand side with investment opportunities displayed as cards.
-• Sorting options above the property listings.
-Page 9 of 17
-Property Analysis Page:
-• Top half features a large graph or financial metrics dashboard.
-• ROI calculator and downloadable documents below.
-Investment Commitment Page:
-• Clean summary layout with payment options at the bottom.
-Investor Dashboard:
-• Tabs for "Portfolio Overview," "Market Updates," and "Wallet."
-• Graphical insights on investment performance.
-Agent Dashboard Overview
-Purpose: Provide agents with tools to manage viewings, properties, and investor 
-assignments seamlessly.
-Key Features of the Agent Dashboard
-1. Automated Viewing Scheduling:
-◦ When a customer or investor books a viewing, it is automatically added 
-to the agent’s schedule.
-2. Property Assignment:
-◦ Investors can assign properties to specific agents.
-3. Link Sharing:
-◦ Agents can generate and share property links with customers or 
-investors.
-4. Communication Tools:
-◦ Integrated chat and email for seamless communication.
-5. Performance Tracking:
-◦ Metrics to track viewings, bookings, and sales.
-6. Document Management:
-◦ Upload and share property documents (e.g., contracts, brochures).
-Agent Dashboard Screens
-Screen 1: Dashboard Overview
-Purpose: Provide a snapshot of the agent’s activities and upcoming tasks.
-Key Elements:
-• Upcoming Viewings:
-◦ List of scheduled viewings with property details, customer/investor 
-name, and time.
-◦ "View Details" Button: To see more information about the viewing.
-• Assigned Properties:
-◦ List of properties assigned by investors.
-◦ "View Property" Button: To see property details.
-• Quick Links:
-◦ "Schedule a Viewing" Button: To manually add a viewing.
-◦ "Generate Property Link" Button: To create a shareable link.
-• Performance Metrics:
-Page 10 of 17
-◦ Number of viewings scheduled.
-◦ Number of properties assigned.
-◦ Conversion rate (bookings/viewings).
-Screen 2: Viewing Schedule
-Purpose: Manage and track all viewings.
-Key Elements:
-• Calendar View:
-◦ Interactive calendar displaying all scheduled viewings.
-◦ Color-coded by status (e.g., upcoming, completed, canceled).
-• List View:
-◦ Detailed list of viewings with filters (e.g., by date, property, status).
-• Viewing Details:
-◦ Property name, location, and thumbnail.
-◦ Customer/investor name and contact information.
-◦ "Reschedule" or "Cancel" Button: For managing viewings.
-• Automated Notifications:
-◦ Reminders for upcoming viewings (email or SMS).
-Screen 3: Assigned Properties
-Purpose: Manage properties assigned by investors.
-Key Elements:
-• Property List:
-◦ Thumbnail, location, and key details (e.g., price, ROI potential).
-◦ "View Details" Button: To see full property information.
-• Filters:
-◦ By location, investment stage, or ROI potential.
-• Actions:
-◦ "Generate Link" Button: To create a shareable property link.
-◦ "Schedule Viewing" Button: To add a viewing for the property.
-Screen 4: Property Details
-Purpose: Provide detailed information about an assigned property.
-Key Elements:
-• High-Resolution Images: Gallery with a carousel.
-• Virtual Tour: Embedded video or 360° tour.
-• Amenities List: Icons with descriptions (e.g., Wi-Fi, Pool, Gym).
-• Financial Metrics: ROI potential, occupancy rates, and cash flow estimates.
-• Documents Section: Legal and property documents for due diligence.
-• Actions:
-◦ "Share Link" Button: To generate a shareable link.
-◦ "Schedule Viewing" Button: To add a viewing.
-Page 11 of 17
-Screen 5: Communication Tools
-Purpose: Facilitate seamless communication with customers and investors.
-Key Elements:
-• Integrated Chat:
-◦ Real-time messaging with customers and investors.
-◦ Chat history and search functionality.
-• Email Integration:
-◦ Send and receive emails directly from the dashboard.
-• Templates:
-◦ Pre-written templates for common messages (e.g., viewing 
-confirmation, follow-up).
-Screen 6: Performance Tracking
-Purpose: Track and analyze agent performance.
-Key Elements:
-• Metrics:
-◦ Number of viewings scheduled.
-◦ Number of bookings completed.
-◦ Conversion rate (bookings/viewings).
-• Graphs and Charts:
-◦ Visual representation of performance over time.
-• Goals:
-◦ Set and track monthly or quarterly goals.
-Screen 7: Document Management
-Purpose: Store and share property-related documents.
-Key Elements:
-• Upload Documents:
-◦ Contracts, brochures, and legal documents.
-• Organize by Property:
-◦ Documents are categorized by property.
-• Share Documents:
-◦ Generate shareable links for customers or investors.
-Additional Features
-1. Mobile App Integration:
-◦ Agents can access the dashboard on the go via a mobile app.
-2. Notifications:
-◦ Real-time alerts for new viewings, messages, or assignments.
-Page 12 of 17
-3. Customizable Dashboard:
-◦ Agents can customize the layout to prioritize the information they need 
-most.
-Wireframe Sketches
-1. Dashboard Overview:
-◦ Upcoming viewings, assigned properties, and quick links.
-2. Viewing Schedule:
-◦ Calendar and list view of scheduled viewings.
-3. Assigned Properties:
-◦ List of properties with filters and actions.
-4. Property Details:
-◦ High-resolution images, virtual tour, and financial metrics.
-5. Communication Tools:
-◦ Integrated chat and email with templates.
-6. Performance Tracking:
-◦ Metrics, graphs, and goal tracking.
-7. Document Management:
-◦ Upload, organize, and share documents.
-1. Dashboard Overview
-Prompt:
-"Design a dashboard overview page for real estate agents. Include the following 
-elements:
-• A section for Upcoming Viewings with a list of scheduled viewings, including 
-property details, customer/investor name, and time. Add a 'View Details' 
-button for each viewing.
-• A section for Assigned Properties with a list of properties assigned by investors. 
-Include a 'View Property' button for each property.
-• Quick Links for 'Schedule a Viewing' and 'Generate Property Link.'
-• Performance Metrics displaying the number of viewings scheduled, properties 
-assigned, and conversion rate.
-• Use a clean, modern design with a neutral color scheme (e.g., whites, grays, 
-and blues)."
-2. Viewing Schedule
-Prompt:
-"Create a viewing schedule page for real estate agents. Include:
-• An Interactive Calendar displaying all scheduled viewings, color-coded by 
-status (e.g., upcoming, completed, canceled).
-• A List View of viewings with filters (e.g., by date, property, status).
-• Viewing Details for each entry, including property name, location, thumbnail, 
-customer/investor name, and contact information.
-• Buttons for 'Reschedule' and 'Cancel.'
-• Automated Notifications section for reminders (email or SMS).
-Page 13 of 17
-• Use a clean layout with a sidebar for filters and a main content area for the 
-calendar and list."
-3. Assigned Properties
-Prompt:
-"Design a page for managing assigned properties. Include:
-• A Property List with thumbnail images, location, and key details (e.g., price, 
-ROI potential). Add a 'View Details' button for each property.
-• Filters for location, investment stage, and ROI potential.
-• Actions like 'Generate Link' and 'Schedule Viewing' for each property.
-• Use a grid layout for the property list and a sidebar for filters. Keep the design 
-professional and easy to navigate."
-4. Property Details
-Prompt:
-"Create a property details page for real estate agents. Include:
-• A High-Resolution Image Gallery with a carousel at the top.
-• A Virtual Tour section below the gallery (embed a video or 360° tour).
-• An Amenities List with icons and descriptions (e.g., Wi-Fi, Pool, Gym).
-• A Financial Metrics section displaying ROI potential, occupancy rates, and 
-cash flow estimates.
-• A Documents Section for legal and property documents.
-• Actions like 'Share Link' and 'Schedule Viewing.'
-• Use a two-column layout with the image gallery and virtual tour on the left, 
-and property details and actions on the right."
-5. Communication Tools
-Prompt:
-"Design a communication tools page for real estate agents. Include:
-• An Integrated Chat section for real-time messaging with customers and 
-investors. Include chat history and search functionality.
-• An Email Integration section for sending and receiving emails directly from the 
-dashboard.
-• Pre-Written Templates for common messages (e.g., viewing confirmation, 
-follow-up).
-• Use a split-screen layout with the chat on the left and email on the right. Keep 
-the design clean and professional."
-6. Performance Tracking
-Page 14 of 17
-Prompt:
-"Create a performance tracking page for real estate agents. Include:
-• Metrics displaying the number of viewings scheduled, bookings completed, 
-and conversion rate.
-• Graphs and Charts for visualizing performance over time.
-• A Goals Section for setting and tracking monthly or quarterly goals.
-• Use a dashboard-style layout with cards for metrics and charts below. Use a 
-modern color scheme with accent colors for highlights."
-7. Document Management
-Prompt:
-"Design a document management page for real estate agents. Include:
-• An Upload Documents section for contracts, brochures, and legal 
-documents.
-• A Document Organization section where documents are categorized by 
-property.
-• A Share Documents section for generating shareable links.
-• Use a table layout for the document list, with filters and actions (e.g., upload, 
-share) at the top. Keep the design clean and functional."
-8. Mobile App Integration
-Prompt:
-"Design a mobile app version of the agent dashboard. Include:
-• A Home Screen with quick access to upcoming viewings, assigned properties, 
-and performance metrics.
-• A Navigation Menu at the bottom for easy access to all sections (e.g., 
-schedule, properties, communication, documents).
-• Push Notifications for new viewings, messages, or assignments.
-• Use a mobile-friendly design with large buttons, clear typography, and a 
-collapsible menu for filters."
-Suggested Category Name
-• AirBnB Financing Hub
-• StayVest Financing
-• HostInvestor Program
-• NeoNest Funding
-These names emphasize the focus on AirBnB investment while keeping the 
-concept user-friendly and professional.
-Key Features for the Business Model
-1. Financing Model:
-Page 15 of 17
-◦ Loan Options: Offer flexible loan terms (short-term, long-term) with 
-competitive interest rates specifically for 1-bedroom apartments 
-intended for AirBnB hosting.
-◦ Revenue Sharing: Alternatively, you could explore a revenue-sharing 
-model where TOBI funds a percentage of the property and earns a 
-share of the rental income.
-2. Eligibility and Application Process:
-◦ Define criteria such as creditworthiness, estimated ROI (based on 
-location and demand), and proof of intent for AirBnB use.
-◦ Create clear terms for repayment, loan tenure, and penalties.
-3. Property Selection:
-◦ Partner with developers and real estate agents to curate a list of 
-properties specifically suited for AirBnB hosting. These could be 
-highlighted on the dashboard.
-4. Risk Mitigation:
-◦ Use predictive tools or analytics to assess the viability of an investment 
-(e.g., location-based AirBnB income potential, seasonal demand).
-◦ Ensure legal compliance and appropriate insurance coverage for 
-properties.
-Dashboard Features
-To make the user experience seamless, the dashboard should include the following 
-sections:
-1. Search and Explore Properties:
-◦ Allow users to browse pre-vetted one-bedroom apartments by 
-location, price, and estimated AirBnB income potential.
-2. Financing Application Portal:
-◦ Include an easy-to-follow loan application process with clear steps and 
-requirements.
-◦ Users should be able to upload documents like ID, proof of income, 
-credit history, and AirBnB business plans.
-3. Investment Calculator:
-◦ Add a tool that calculates expected returns, loan repayment timelines, 
-and profit margins to help users make informed decisions.
-4. Progress Tracking:
-◦ Show the status of their financing application (e.g., submitted, under 
-review, approved).
-◦ Highlight the steps to finalize the deal.
-5. Knowledge Hub:
-◦ Include resources such as guides on how to run a successful AirBnB, tax 
-implications, and property maintenance tips.
-6. Integration with AirBnB:
-◦ Allow users to integrate their AirBnB accounts post-purchase to monitor 
-performance and revenues directly from the dashboard.
-Implementation Steps
-1. Market Research:
-◦ Study your target market to understand demand for AirBnB financing. 
-Focus on areas with high short-term rental demand and legal 
-frameworks supporting such investments.
-Page 16 of 17
-2. Build Partnerships:
-◦ Collaborate with banks, real estate developers, and property 
-management firms to provide a comprehensive package.
-3. Develop the Dashboard:
-◦ Utilize tools like React for a sleek front-end and integrate APIs for 
-property listings, loan processing, and revenue analytics.
-◦ Ensure data security and compliance with financial regulations.
-4. Pilot Program:
-◦ Start with a specific city or region as a test market to refine the model 
-and gather feedback.
-5. Marketing Strategy:
-◦ Leverage social media, real estate events, and AirBnB host 
-communities to attract users.
-Overall Thoughts
-This idea has strong potential as it caters to the growing AirBnB economy and 
-offers a streamlined way for investors to enter the market. Combining property 
-search, financing, and education in one platform can make TOBI a one-stop shop 
-for AirBnB investors. However, it will be crucial to address risks like loan defaults, 
-property mismanagement, and fluctuating rental markets through careful 
-planning and robust due diligence.
-Page 17 of 17
+Comprehensive T.O.B.I Project Documentation
+Overview
+T.O.B.I is a real estate platform facilitating short-let bookings, property investments, gifting properties, and agent-managed listings with a robust wallet system.
+User Roles & Functionalities
+Customers (Regular Users)
+Registration/Login: Email/password or Google OAuth.
+Bookings: Browse, book, and manage short-let stays.
+Gifting: Gift properties (short-let or investment).
+Favorites: Save preferred listings for easy access.
+Private Membership: Subscription-based access (Silver, Gold, Platinum).
+Reviews: Rate and review properties and agents.
+Wallet: Manage payments, refunds, and gift-related transactions.
+Investors
+Investment Options: Outright purchase or installment (60% initial, balance over 2 years).
+Partnership: Properties under installments are managed as short-lets by T.O.B.I.
+Credits: Receive 5M credit for short-let stays if on installment plan.
+Membership: Automatic Private Membership (Gold for installment, Platinum for outright purchase).
+ROI Tracking: Real-time monitoring of returns.
+Management: Optional T.O.B.I property management post-full payment.
+Agents
+Registration & Verification: Requires valid ID, business registration (CAC or equivalent), proof of business location, and property ownership/management authorization.
+Property Listings: Create, edit, and submit property listings for admin approval.
+Commission: Earn commissions from bookings or property sales.
+Withdrawals: Request withdrawal of earnings (requires admin approval).
+Dashboard: View detailed analytics (views, bookings, earnings).
+Admins
+User Verification: Approve or reject agents and investors.
+Property Moderation: Approve, reject, or request edits on property listings.
+Financial Oversight: Manage wallet transactions, approve refunds, commissions, and investment payouts.
+Fraud & Security: Oversee fraud detection, agent/investor re-verifications, and flagged reviews.
+Property Listings
+Details Required: Property name, location, type, price, rooms, amenities, images/videos, availability calendar (short-let), agent information.
+Admin Approval: Mandatory verification of ownership and legality (title deed, legal clearance papers).
+Investment Model
+Installment Purchase: User pays at least 60%, T.O.B.I manages the property as a short-let until fully paid.
+Full Purchase: Immediate ownership and optional management by T.O.B.I.
+Membership Reward: Investors automatically receive Private Membership (Gold for installment, Platinum for outright).
+Gifting Feature
+Initiating Gift: User selects property, enters recipient's email.
+Recipient Existing: Recipient confirms acceptance or declines; if declined, funds revert to sender's wallet.
+Recipient Non-existing: Sender generates a unique gift link. Recipient signs up with the provided link and email.
+Gift Acceptance: Recipient chooses to accept or decline gift; funds refunded to sender's wallet upon decline.
+Short-Let Expiry: If short-let gifts expire unused, sender can reassign or funds convert to wallet credits (non-withdrawable).
+Wallet & Payment System
+Payments: Wallet, Flutterwave integration for cards/bank transfer.
+Wallet Features: Track deposits, withdrawals, refunds, commissions, ROI payments, and gifting credits.
+Withdrawal Rules: Investors and agents can withdraw earnings (admin-approved). Regular customers receive refunds as non-withdrawable credits.
+Reviews & Ratings
+Properties: Users can rate properties after stays or purchases.
+Agent Reviews: Buyers/investors review agents post-transaction.
+Moderation: Admin approves/rejects inappropriate reviews.
+Notifications & Messaging
+Real-Time Notifications: Payment status, booking confirmations, gifting acceptance, admin alerts, fraud flags.
+Messaging: Real-time chat via Socket.IO between customers, investors, and agents.
+Dashboards
+Adaptive Dashboards: Dashboards dynamically adjust based on user roles (Customer, Investor, Agent).
+Role Switching: Users can switch roles in profile settings; re-verification is required when reverting back to Investor or Agent.
+
+
+Universal Features: Wallet overview, booking history, favorites management, notifications.
+Technical Stack
+Frontend
+React, Next.js (App Router), TypeScript
+Tailwind CSS, Shadcn/ui
+GraphQL (Apollo Client)
+JWT Authentication (NextAuth.js)
+Socket.IO (Real-time communication)
+React Dropzone (AWS S3 file uploads)
+Deployment: Vercel
+Backend
+NestJS, Node.js, TypeScript
+PostgreSQL, TypeORM
+JWT (Passport.js), Google OAuth
+Redis (Caching), Socket.IO
+AWS S3 (File storage)
+Deployment: AWS (Elastic Beanstalk, EC2)
+Monitoring: Sentry, Prometheus, Grafana
+Deployment
+CI/CD: GitHub Actions
+Containerization: Docker
+Scaling & Hosting: Kubernetes, AWS
+Database Backups: AWS RDS snapshots
+Performance Monitoring: New Relic, Datadog
+This document captures every key functionality, detailed technical implementation steps, and user interactions for efficient development and deployment of the T.O.B.I platform

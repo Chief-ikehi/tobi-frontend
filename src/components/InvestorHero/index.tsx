@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 
-const Hero: React.FC = () => {
+const InvestorHero: React.FC = () => {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
@@ -19,20 +19,20 @@ const Hero: React.FC = () => {
   const getHeroBackground = () => {
     if (mounted) {
       if (theme === "dark") {
-        return "url('/images/hero/hero-dark.png')";
+        return "url('/images/hero/investor-hero-dark.jpg')";
       } else if (theme === "light") {
-        return "url('/images/hero/hero-light.png')";
+        return "url('/images/hero/investor-hero-light.png')";
       } else {
         return window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "url('/images/hero/hero-dark.png')"
-          : "url('/images/hero/hero-light.png')";
+          ? "url('/images/hero/investor-hero-dark.jpg')"
+          : "url('/images/hero/investor-hero-light.png')";
       }
     }
-    return "url('/images/hero/hero-light.png')"; // Default fallback
+    return "url('/images/hero/investor-hero-light.png')"; // Default fallback
   };
 
   const handleJoinClick = () => {
-    router.push("/signup"); // Redirect to signup page
+    router.push("/investments"); // Redirect to signup page
   };
 
   return (
@@ -64,11 +64,11 @@ const Hero: React.FC = () => {
           onClick={handleJoinClick}
           className="w-full md:w-[200px] h-12 px-3 rounded-lg text-base bg-black text-white hover:bg-blue-700 duration-300 ease-in-out dark:hover:bg-black dark:bg-btndark"
         >
-          Join Now
+          Invest in Property
         </button>
       </div>
     </section>
   );
 };
 
-export default Hero;
+export default InvestorHero;

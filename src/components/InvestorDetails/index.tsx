@@ -2,50 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Property } from '@/lib/services/propertyService';
-import { getProperties } from '@/lib/services/propertyService';
-import { InvestmentPropertyCard } from '@/components/investors/InvestmentPropertyCard';
 
-function Details() {
-  const [featuredProperties, setFeaturedProperties] = useState<Property[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+const Details = () => {
 
-  useEffect(() => {
-    const fetchFeaturedProperties = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const properties = await getProperties({ investmentOnly: true });
-        // Get the first 3 properties as featured
-        setFeaturedProperties(properties.slice(0, 3));
-      } catch (err) {
-        setError('Failed to fetch featured properties. Please try again later.');
-        console.error('Error fetching properties:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchFeaturedProperties();
-  }, []);
-
-  if (error) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-red-500 text-center">
-          <p className="text-xl font-semibold mb-2">Error</p>
-          <p>{error}</p>
-        </div>
-      </div>
-    );
-  }
   return (
     <div className="min-h-screen dark:bg-black bg-gray-50">
-  
-
       {/* What We Do Section */}
-      <section className="py-16">
+      <section className="py-5">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">What We Do</h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -126,36 +89,6 @@ function Details() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Investment Opportunities Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Featured Investment Opportunities</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {loading ? (
-              <div className="col-span-full text-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto"></div>
-              </div>
-            ) : featuredProperties.length > 0 ? (
-              featuredProperties.map((property) => (
-                <InvestmentPropertyCard key={property.id} property={property} />
-              ))
-            ) : (
-              <div className="col-span-full text-center text-gray-600">
-                <p>No featured properties available at the moment.</p>
-              </div>
-            )}
-          </div>
-          <div className="text-center mt-8">
-            <button className="inline-block dark:bg-white bg-black text-white dark:text-black px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors" >
-              <Link
-              href="/investors/opportunities">
-              View All Opportunities
-            </Link>
-            </button>
           </div>
         </div>
       </section>

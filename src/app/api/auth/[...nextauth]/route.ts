@@ -1,35 +1,15 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import bcrypt from "bcryptjs";
-import prisma from "@/lib/prisma"; // Import the Prisma client
-
-declare module "next-auth" {
-  interface Session {
-    user: {
-      id: string;
-      name?: string | null;
-      email?: string | null;
-      image?: string | null;
-    };
-    accessToken?: string;
-  }
-  interface User {
-    id: string;
-    accessToken?: string;
-  }
-}
 
 const handler = NextAuth({
-  adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
     CredentialsProvider({
-      name: "credentials",
+      name: "Credentials",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
@@ -39,69 +19,68 @@ const handler = NextAuth({
           throw new Error("Please enter your email and password");
         }
 
-        const user = await prisma.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
-        });
+        try {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: credentials.email,
+              password: credentials.password,
+            }),
+          });
 
-        if (!user || !user.password) {
-          throw new Error("No user found with this email");
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.message || "Authentication failed");
+          }
+
+          return {
+            id: data.user.id,
+            email: data.user.email,
+            name: data.user.name,
+            role: data.user.role,
+            accessToken: data.accessToken,
+          };
+        } catch (error: any) {
+          throw new Error(error.message || "Authentication failed");
         }
-
-        const passwordMatch = await bcrypt.compare(credentials.password, user.password);
-
-        if (!passwordMatch) {
-          throw new Error("Incorrect password");
-        }
-
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-        };
       },
     }),
   ],
-  session: {
-    strategy: "jwt",
+  pages: {
+    signIn: "/auth/signin",
+    signOut: "/auth/signout",
+    error: "/auth/error",
   },
   callbacks: {
     async jwt({ token, user, account }) {
-      if (user) {
-        token.id = user.id;
-      }
-      if (account?.provider === "google") {
-        // Create or update user in the database
-        const existingUser = await prisma.user.findUnique({
-          where: { email: token.email! },
-        });
-
-        if (!existingUser) {
-          const newUser = await prisma.user.create({
-            data: {
-              email: token.email!,
-              name: token.name!,
-              image: token.picture,
-            },
-          });
-          token.id = newUser.id;
-        } else {
-          token.id = existingUser.id;
-        }
+      if (user && account) {
+        // After successful sign in
+        return {
+          ...token,
+          accessToken: account.type === "credentials" ? user.accessToken : account.access_token,
+          role: user.role,
+        };
       }
       return token;
     },
     async session({ session, token }) {
-      if (session.user) {
-        session.user.id = token.id as string;
-      }
-      return session;
+      // Send properties to the client
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          role: token.role,
+        },
+        accessToken: token.accessToken,
+      };
     },
   },
-  pages: {
-    signIn: "/auth/signin",
-    error: "/auth/error",
+  session: {
+    strategy: "jwt",
   },
 });
 

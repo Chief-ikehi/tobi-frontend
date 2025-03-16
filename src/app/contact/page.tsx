@@ -6,7 +6,8 @@ export const metadata: Metadata = {
   title: "Contact Page",
 
   // other metadata
-  description: "This is Contact page for TOBI"
+  description: "This is Contact page for TOBI",
+  icons: "/images/tobi-favicon.png"
 };
 
 const ContactPage = () => {

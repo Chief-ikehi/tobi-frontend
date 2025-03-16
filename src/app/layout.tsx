@@ -8,8 +8,6 @@ import { ThemeProvider } from "next-themes";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import ToasterContext from "./context/ToastContext";
-import { ApolloProvider } from '@/components/providers/ApolloProvider';
-import { NotificationProvider } from '@/context/NotificationContext';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,13 +20,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`dark:bg-black ${inter.className}`}>
         <SessionProvider>
-          <ApolloProvider>
             <ThemeProvider
               attribute="class"
               defaultTheme="system"
               enableSystem
             >
-              <NotificationProvider>
                 <div className="pt-20">
                   <Header />
                   <ToasterContext />
@@ -37,9 +33,7 @@ export default function RootLayout({
                   <ScrollToTop />
                 </div>
                 <Toaster />
-              </NotificationProvider>
             </ThemeProvider>
-          </ApolloProvider>
         </SessionProvider>
       </body>
     </html>

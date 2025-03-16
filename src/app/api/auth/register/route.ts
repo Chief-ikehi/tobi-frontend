@@ -1,56 +1,44 @@
-import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-import bcrypt from 'bcryptjs';
-
-const prisma = new PrismaClient();
+import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { firstName, lastName, email, password } = await req.json();
+    const body = await req.json();
+    const { firstName, lastName, email, password, userType } = body;
 
-    // Validate input
-    if (!firstName || !lastName || !email || !password) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      );
-    }
-
-    // Check if user already exists
-    const existingUser = await prisma.user.findUnique({
-      where: { email }
-    });
-
-    if (existingUser) {
-      return NextResponse.json(
-        { error: 'User already exists' },
-        { status: 400 }
-      );
-    }
-
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create user
-    const user = await prisma.user.create({
-      data: {
-        name: `${firstName} ${lastName}`,
+    // Call our backend API to register the user
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
         email,
-        password: hashedPassword,
-      }
+        password,
+        userType: userType || "CUSTOMER", // Default to CUSTOMER if not specified
+      }),
     });
 
-    return NextResponse.json({
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-      }
-    });
-  } catch (error) {
-    console.error('Registration error:', error);
+    const data = await response.json();
+
+    if (!response.ok) {
+      return NextResponse.json(
+        { error: data.message || "Registration failed" },
+        { status: response.status }
+      );
+    }
+
     return NextResponse.json(
-      { error: 'Something went wrong' },
+      { 
+        message: "Registration successful",
+        user: data.user 
+      },
+      { status: 201 }
+    );
+  } catch (error: any) {
+    return NextResponse.json(
+      { error: error.message || "Internal server error" },
       { status: 500 }
     );
   }

@@ -1,7 +1,5 @@
 import { Metadata } from "next";
-//import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import FeaturedProperties from "@/components/FeaturedProperties";
 
 export const metadata: Metadata = {
   title: "TOBI | The One Bedroom Institute",
@@ -15,7 +13,6 @@ export default function Home() {
   return (
       <main>
       <Hero />
-      <FeaturedProperties />
       </main>
   );
 }

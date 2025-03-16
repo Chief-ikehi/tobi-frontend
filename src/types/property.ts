@@ -1,85 +1,39 @@
-export enum PropertyType {
-  HOUSE = 'HOUSE',
-  APARTMENT = 'APARTMENT',
-  CONDO = 'CONDO',
-  TOWNHOUSE = 'TOWNHOUSE',
-  LAND = 'LAND',
-  COMMERCIAL = 'COMMERCIAL'
-}
-
-export enum ListingType {
-  SALE = 'SALE',
-  RENT = 'RENT',
-  INVESTMENT = 'INVESTMENT'
-}
-
-export enum SafetyRating {
-  EXCELLENT = 'EXCELLENT',
-  GOOD = 'GOOD',
-  AVERAGE = 'AVERAGE',
-  FAIR = 'FAIR',
-  POOR = 'POOR'
-}
+export type PropertyType = "ALL" | "SHORTLET" | "INVESTMENT" | "BOTH";
 
 export interface Property {
   id: string;
   title: string;
   description: string;
+  location: string;
   price: number;
-  propertyType: PropertyType;
-  listingType: ListingType;
-  address: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  bedrooms: number;
-  bathrooms: number;
-  squareFootage: number;
+  type: PropertyType;
   amenities: string[];
   images: string[];
-  isFeatured: boolean;
-  isAvailable: boolean;
-  latitude?: number;
-  longitude?: number;
-  safetyRating: SafetyRating;
-  virtualTourUrl?: string;
-  nearbyAttractions: string[];
-  expectedRoi?: number;
-  occupancyRate?: number;
-  propertyDocuments?: string[];
-  monthlyExpenses?: number;
-  monthlyRevenue?: number;
-  viewCount: number;
-  yearBuilt?: number;
-  createdAt: string;
-  owner: {
+  bedrooms: number;
+  bathrooms: number;
+  squareFeet: number;
+  maxGuests?: number;
+  availableDates?: Array<{
+    start: string;
+    end: string;
+  }>;
+  agent: {
     id: string;
-    fullName: string;
+    name: string;
     email: string;
+    phone: string;
+    avatar: string;
   };
+  createdAt: string;
+  updatedAt: string;
 }
 
-export interface PropertyFilters {
-  minPrice?: number;
-  maxPrice?: number;
-  propertyType?: PropertyType;
-  listingType?: ListingType;
-  city?: string;
-  state?: string;
-  minBedrooms?: number;
-  maxBedrooms?: number;
-  minBathrooms?: number;
-  maxBathrooms?: number;
-  minSquareFootage?: number;
-  maxSquareFootage?: number;
-  isFeatured?: boolean;
-  isAvailable?: boolean;
-  safetyRating?: SafetyRating;
-  minExpectedRoi?: number;
-  minOccupancyRate?: number;
-  nearbyAttractions?: string[];
-  maxMonthlyExpenses?: number;
-  minMonthlyRevenue?: number;
-  searchTerm?: string;
-  amenities?: string[];
+export interface InvestmentProperty extends Property {
+  roi: number;
+  managementFee: number;
+  monthlyIncome: number;
+  occupancyRate: number;
+  propertyValue: number;
+  installmentPrice: number;
+  outrighPrice: number;
 } 

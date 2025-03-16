@@ -29,7 +29,7 @@ const menuData: Menu[] = [
     id: 4,
     title: "Private Members",
     newTab: false,
-    path: "/private-members",
+    path: "/membership",
   },
   {
     id: 5,

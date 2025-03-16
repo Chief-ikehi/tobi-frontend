@@ -29,13 +29,25 @@ const Signin = () => {
       if (result?.error) {
         toast.error(result.error);
       } else {
-        toast.success("Logged in successfully!");
+        toast.success("Logged in successfully!",{
+          position: "top-center", // Position of the toast
+          duration: 4000,
+          style: {
+          zIndex: 99999,
+          }
+      });
         router.push("/dashboard");
         router.refresh();
       }
     } catch (error) {
       console.error("Login error:", error);
-      toast.error("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.",{
+        position: "top-center", // Position of the toast
+        duration: 4000,
+        style: {
+        zIndex: 99999,
+        }
+    });
     } finally {
       setLoading(false);
     }

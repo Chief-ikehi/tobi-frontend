@@ -5,7 +5,8 @@ export const metadata: Metadata = {
   title: "Sign Up Page - TOBI",
 
   // other metadata
-  description: "This is Sign Up page for TOBI"
+  description: "This is Sign Up page for TOBI",
+  icons: "/images/tobi-favicon.png"
 };
 
 export default function SignUpPage() {
