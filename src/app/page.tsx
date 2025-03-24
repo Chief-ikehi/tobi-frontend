@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Hero from "@/components/Hero";
+import Properties from "@/components/Properties";
 
 export const metadata: Metadata = {
   title: "TOBI | The One Bedroom Institute",
@@ -13,6 +14,7 @@ export default function Home() {
   return (
       <main>
       <Hero />
+      <Properties />
       </main>
   );
 }

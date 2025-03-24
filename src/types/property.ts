@@ -1,4 +1,4 @@
-export type PropertyType = "ALL" | "SHORTLET" | "INVESTMENT" | "BOTH";
+export type PropertyType = "SHORTLET" | "INVESTMENT" | "BOTH";
 
 export interface Property {
   id: string;
@@ -6,7 +6,9 @@ export interface Property {
   description: string;
   location: string;
   price: number;
-  type: PropertyType;
+  phone_number: string
+  property_type: string;
+  cost_price: number;
   amenities: string[];
   images: string[];
   bedrooms: number;
@@ -21,7 +23,7 @@ export interface Property {
     id: string;
     name: string;
     email: string;
-    phone: string;
+    phone_number: string;
     avatar: string;
   };
   createdAt: string;
@@ -35,5 +37,5 @@ export interface InvestmentProperty extends Property {
   occupancyRate: number;
   propertyValue: number;
   installmentPrice: number;
-  outrighPrice: number;
-} 
+  outrightPrice: number; // fixed typo
+}

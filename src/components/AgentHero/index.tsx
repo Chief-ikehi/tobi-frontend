@@ -32,7 +32,7 @@ const AgentHero: React.FC = () => {
   };
 
   const handleJoinClick = () => {
-    router.push("/agent/dashboard/"); // Redirect to signup page
+    router.push("/dashboard/page"); // Redirect to signup page
   };
 
   return (

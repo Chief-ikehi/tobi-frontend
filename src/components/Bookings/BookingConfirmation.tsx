@@ -209,7 +209,7 @@ const BookingConfirmation = ({ bookingId }: BookingConfirmationProps) => {
                     {booking.property.agent.name}
                   </h4>
                   <p className="text-sm text-body-color">
-                    Contact: {booking.property.agent.phone}
+                    Contact: {booking.property.agent.phone_number}
                   </p>
                 </div>
               </div>

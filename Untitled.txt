@@ -11,7 +11,7 @@ Private Membership: Subscription-based access (Silver, Gold, Platinum).
 Reviews: Rate and review properties and agents.
 Wallet: Manage payments, refunds, and gift-related transactions.
 Investors
-Investment Options: Outright purchase or installment (60% initial, balance over 2 years).
+Investment Options: Outright purchase or instalment (60% initial, balance over 2 years).
 Partnership: Properties under installments are managed as short-lets by T.O.B.I.
 Credits: Receive 5M credit for short-let stays if on installment plan.
 Membership: Automatic Private Membership (Gold for installment, Platinum for outright purchase).
@@ -34,12 +34,12 @@ Admin Approval: Mandatory verification of ownership and legality (title deed, le
 Investment Model
 Installment Purchase: User pays at least 60%, T.O.B.I manages the property as a short-let until fully paid.
 Full Purchase: Immediate ownership and optional management by T.O.B.I.
-Membership Reward: Investors automatically receive Private Membership (Gold for installment, Platinum for outright).
+Membership Reward: Investors automatically receive Private Membership (Gold for instalment, Platinum for outright).
 Gifting Feature
-Initiating Gift: User selects property, enters recipient's email.
-Recipient Existing: Recipient confirms acceptance or declines; if declined, funds revert to sender's wallet.
-Recipient Non-existing: Sender generates a unique gift link. Recipient signs up with the provided link and email.
-Gift Acceptance: Recipient chooses to accept or decline gift; funds refunded to sender's wallet upon decline.
+Initiating Gift: The user selects a property and enters the recipient's email.
+Recipient Existing: Recipient confirms acceptance or declines; if declined, funds revert to the sender's wallet.
+Recipient Non-existing: The Sender generates a unique gift link. The recipient signs up with the provided link and email.
+Gift Acceptance: The recipient chooses to accept or decline the gift; funds are refunded to the sender's wallet upon decline.
 Short-Let Expiry: If short-let gifts expire unused, sender can reassign or funds convert to wallet credits (non-withdrawable).
 Wallet & Payment System
 Payments: Wallet, Flutterwave integration for cards/bank transfer.
@@ -54,31 +54,37 @@ Real-Time Notifications: Payment status, booking confirmations, gifting acceptan
 Messaging: Real-time chat via Socket.IO between customers, investors, and agents.
 Dashboards
 Adaptive Dashboards: Dashboards dynamically adjust based on user roles (Customer, Investor, Agent).
-Role Switching: Users can switch roles in profile settings; re-verification is required when reverting back to Investor or Agent.
+Role Switching: Users can switch roles in profile settings; re-verification is required when reverting to Investor or Agent.
 
 
-Universal Features: Wallet overview, booking history, favorites management, notifications.
+Universal Features: Wallet overview, booking history, favourites management, notifications.
 Technical Stack
+
 Frontend
-React, Next.js (App Router), TypeScript
-Tailwind CSS, Shadcn/ui
-GraphQL (Apollo Client)
-JWT Authentication (NextAuth.js)
-Socket.IO (Real-time communication)
-React Dropzone (AWS S3 file uploads)
+Framework: React, Next.js (App Router), TypeScript
+Styling: Tailwind CSS, Shadcn/ui
+State Management & API: REST API (Axios / React Query / SWR)
+Authentication: JWT Authentication (NextAuth.js)
+Real-Time Communication: Socket.IO
+File Uploads: React Dropzone (Cloudinary for images/videos, Firebase for documents)
 Deployment: Vercel
 Backend
-NestJS, Node.js, TypeScript
-PostgreSQL, TypeORM
-JWT (Passport.js), Google OAuth
-Redis (Caching), Socket.IO
-AWS S3 (File storage)
-Deployment: AWS (Elastic Beanstalk, EC2)
-Monitoring: Sentry, Prometheus, Grafana
-Deployment
-CI/CD: GitHub Actions
-Containerization: Docker
-Scaling & Hosting: Kubernetes, AWS
-Database Backups: AWS RDS snapshots
-Performance Monitoring: New Relic, Datadog
+Core API & Business Logic: Django + Django Rest Framework (DRF) (REST API)
+Database: PostgreSQL (Django ORM)
+Authentication:
+JWT (djangorestframework-simplejwt)
+Google OAuth (django-allauth)
+File Storage:
+Cloudinary (Property images, user profile pictures, marketing media)
+Firebase Storage (Legal documents, invoices, PDFs)
+Task Queue & Async Processing: Celery + Redis
+Caching & Real-Time Data: Redis (AWS ElastiCache)
+Microservices (Real-Time & Notifications)
+Framework: NestJS (TypeScript)
+Messaging & Notifications:
+WebSockets (Socket.IO)
+Push Notifications (Firebase Cloud Messaging)
+Real-Time Booking & Chat: Redis Pub/Sub
+Deployment: AWS EC2 or AWS Lambda
+
 This document captures every key functionality, detailed technical implementation steps, and user interactions for efficient development and deployment of the T.O.B.I platform

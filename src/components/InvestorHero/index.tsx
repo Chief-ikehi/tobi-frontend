@@ -32,7 +32,7 @@ const InvestorHero: React.FC = () => {
   };
 
   const handleJoinClick = () => {
-    router.push("/investments"); // Redirect to signup page
+    router.push("/auth/signup"); // Redirect to signup page
   };
 
   return (

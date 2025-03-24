@@ -11,7 +11,7 @@ interface PropertyFiltersProps {
       max: number;
     };
     amenities: string[];
-    propertyType: PropertyType;
+    propertyType: PropertyType | "ALL";
   };
   onFilterChange: (filters: PropertyFiltersProps["filters"]) => void;
 }
@@ -32,39 +32,36 @@ const AMENITIES = [
 const PropertyFilters = ({ filters, onFilterChange }: PropertyFiltersProps) => {
   const [localFilters, setLocalFilters] = useState(filters);
 
-  const handleLocationChange = (location: string) => {
-    const newFilters = { ...localFilters, location };
+  const update = (updates: Partial<typeof filters>) => {
+    const newFilters = { ...localFilters, ...updates };
     setLocalFilters(newFilters);
     onFilterChange(newFilters);
+  };
+
+  const handleLocationChange = (location: string) => {
+    update({ location });
   };
 
   const handlePriceChange = (type: "min" | "max", value: string) => {
-    const numValue = value === "" ? (type === "min" ? 0 : 1000000000) : parseInt(value);
-    const newFilters = {
-      ...localFilters,
+    const num = value === "" ? (type === "min" ? 0 : 1000000000) : parseInt(value);
+    update({
       priceRange: {
         ...localFilters.priceRange,
-        [type]: numValue,
+        [type]: num,
       },
-    };
-    setLocalFilters(newFilters);
-    onFilterChange(newFilters);
+    });
   };
 
   const handleAmenityToggle = (amenity: string) => {
-    const newAmenities = localFilters.amenities.includes(amenity)
+    const amenities = localFilters.amenities.includes(amenity)
       ? localFilters.amenities.filter((a) => a !== amenity)
       : [...localFilters.amenities, amenity];
 
-    const newFilters = { ...localFilters, amenities: newAmenities };
-    setLocalFilters(newFilters);
-    onFilterChange(newFilters);
+    update({ amenities });
   };
 
-  const handlePropertyTypeChange = (type: PropertyType) => {
-    const newFilters = { ...localFilters, propertyType: type };
-    setLocalFilters(newFilters);
-    onFilterChange(newFilters);
+  const handlePropertyTypeChange = (type: PropertyType | "ALL") => {
+    update({ propertyType: type });
   };
 
   return (
@@ -73,13 +70,13 @@ const PropertyFilters = ({ filters, onFilterChange }: PropertyFiltersProps) => {
         Filter Properties
       </h3>
 
-      {/* Property Type Switch */}
+      {/* Property Type Filter */}
       <div className="mb-7.5">
         <label className="mb-3 block text-sm font-medium text-black dark:text-white">
           Property Type
         </label>
         <div className="flex flex-wrap gap-3">
-          {(["ALL", "SHORTLET", "INVESTMENT", "BOTH"] as PropertyType[]).map((type) => (
+          {(["ALL", "SHORTLET", "INVESTMENT", "BOTH"] as (PropertyType | "ALL")[]).map((type) => (
             <button
               key={type}
               onClick={() => handlePropertyTypeChange(type)}
@@ -89,7 +86,7 @@ const PropertyFilters = ({ filters, onFilterChange }: PropertyFiltersProps) => {
                   : "bg-[#F7F8FA] text-body-color hover:bg-primary hover:text-white dark:bg-dark-2"
               }`}
             >
-              {type === "ALL" ? "All Types" : type === "BOTH" ? "Both" : type.toLowerCase()}
+              {type === "ALL" ? "All Types" : type === "BOTH" ? "Both" : type.charAt(0) + type.slice(1).toLowerCase()}
             </button>
           ))}
         </div>
@@ -114,7 +111,7 @@ const PropertyFilters = ({ filters, onFilterChange }: PropertyFiltersProps) => {
         </select>
       </div>
 
-      {/* Price Range Filter */}
+      {/* Price Filter */}
       <div className="mb-7.5">
         <label className="mb-3 block text-sm font-medium text-black dark:text-white">
           Price Range
@@ -138,7 +135,7 @@ const PropertyFilters = ({ filters, onFilterChange }: PropertyFiltersProps) => {
         </div>
       </div>
 
-      {/* Amenities Filter */}
+      {/* Amenities */}
       <div>
         <label className="mb-3 block text-sm font-medium text-black dark:text-white">
           Amenities
@@ -180,4 +177,4 @@ const PropertyFilters = ({ filters, onFilterChange }: PropertyFiltersProps) => {
   );
 };
 
-export default PropertyFilters; 
+export default PropertyFilters;

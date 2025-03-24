@@ -6,7 +6,7 @@ export async function POST(req: Request) {
     const { firstName, lastName, email, password, userType } = body;
 
     // Call our backend API to register the user
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, {
+    const response = await fetch(`${process.env.API_URL}/auth/register/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

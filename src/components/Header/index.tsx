@@ -1,11 +1,9 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useSession, signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
-
 import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
 
@@ -13,26 +11,22 @@ const Header = () => {
   const [navigationOpen, setNavigationOpen] = useState(false);
   const [dropdownToggler, setDropdownToggler] = useState(false);
   const [stickyMenu, setStickyMenu] = useState(false);
+  const [user, setUser] = useState<any>(null);
   const router = useRouter();
-
-  const signinButton = async () => {
-      router.push("/auth/signin"); // Redirect to dashboard or wherever needed
-  };
-
-  const signupButton = async () => {
-      router.push("/auth/signup"); // Redirect to dashboard or wherever needed
-  };
-
   const pathUrl = usePathname();
-  const { data: session } = useSession();
 
-  // Sticky menu
+  const signinButton = () => router.push("/auth/signin");
+  const signupButton = () => router.push("/auth/signup");
+
+  const logout = () => {
+    localStorage.clear();
+    setUser(null);
+    router.push("/auth/signin");
+  };
+
   const handleStickyMenu = () => {
-    if (window.scrollY >= 20) {
-      setStickyMenu(true);
-    } else {
-      setStickyMenu(false);
-    }
+    if (window.scrollY >= 20) setStickyMenu(true);
+    else setStickyMenu(false);
   };
 
   useEffect(() => {
@@ -40,7 +34,23 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleStickyMenu);
   }, []);
 
-  // Close navigation when any link is clicked
+  // Load user from localStorage
+  useEffect(() => {
+    const loadUser = () => {
+      const token = localStorage.getItem("access_token");
+      const name = localStorage.getItem("user_name");
+      const email = localStorage.getItem("user_email");
+      const image = localStorage.getItem("user_image");
+
+      if (token) setUser({ name, email, image });
+      else setUser(null);
+    };
+
+    loadUser();
+    window.addEventListener("storage", loadUser);
+    return () => window.removeEventListener("storage", loadUser);
+  }, []);
+
   const handleLinkClick = () => {
     setNavigationOpen(false);
     setDropdownToggler(false);
@@ -49,26 +59,25 @@ const Header = () => {
   const isActive = (path: string) => pathUrl === path;
 
   const AuthButtons = () => {
-    if (session) {
+    if (user) {
       return (
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-          <Link href = "/dashboard">
-            <Image
-              src={session.user?.image || "/globe.svg"}
-              alt="User Avatar"
-              width={32}
-              height={32}
-              className="rounded-full transition-transform duration-300 ease-in-out hover:scale-110"
-            />
+            <Link href="/dashboard">
+              <Image
+                src={user.image || "/globe.svg"}
+                alt="User Avatar"
+                width={32}
+                height={32}
+                className="rounded-full transition-transform duration-300 ease-in-out hover:scale-110"
+              />
             </Link>
-            <Link href = "/dashboard">
-            <p className="text-sm">{session.user?.name}</p>
+            <Link href="/dashboard">
+              <p className="text-sm">{user.name}</p>
             </Link>
-
           </div>
           <button
-            onClick={() => signOut()}
+            onClick={logout}
             className="rounded-full bg-red-500 px-4 py-2 text-sm text-white hover:bg-red-800"
           >
             Sign Out
@@ -109,20 +118,12 @@ const Header = () => {
             <Image
               src="/images/logo/tobi-logo-dark.svg"
               alt="logo"
-              width={119.03}
-              height={30}
-              className="hidden w-full dark:block transition-transform duration-300 ease-in-out hover:scale-110"
-            />
-            <Image
-              src="/images/logo/tobi-logo-dark.svg"
-              alt="logo"
               width={119}
               height={30}
-              className="w-full dark:hidden transition-transform duration-300 ease-in-out hover:scale-110"
+              className="w-full transition-transform duration-300 ease-in-out hover:scale-110"
             />
           </Link>
 
-          {/* Hamburger Toggle BTN */}
           <button
             aria-label="Toggle navigation menu"
             className="block xl:hidden"
@@ -130,39 +131,18 @@ const Header = () => {
           >
             <span className="relative block h-5.5 w-5.5 cursor-pointer">
               <span className="absolute right-0 block h-full w-full">
-                <span
-                  className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-black delay-[0] duration-200 ease-in-out dark:bg-white ${
-                    !navigationOpen ? "!w-full delay-300" : "w-0"
-                  }`}
-                ></span>
-                <span
-                  className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-black delay-150 duration-200 ease-in-out dark:bg-white ${
-                    !navigationOpen ? "delay-400 !w-full" : "w-0"
-                  }`}
-                ></span>
-                <span
-                  className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-black delay-200 duration-200 ease-in-out dark:bg-white ${
-                    !navigationOpen ? "!w-full delay-500" : "w-0"
-                  }`}
-                ></span>
+                <span className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-black delay-[0] duration-200 ease-in-out dark:bg-white ${!navigationOpen ? "!w-full delay-300" : "w-0"}`} />
+                <span className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-black delay-150 duration-200 ease-in-out dark:bg-white ${!navigationOpen ? "delay-400 !w-full" : "w-0"}`} />
+                <span className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-black delay-200 duration-200 ease-in-out dark:bg-white ${!navigationOpen ? "!w-full delay-500" : "w-0"}`} />
               </span>
               <span className="du-block absolute right-0 h-full w-full rotate-45">
-                <span
-                  className={`absolute left-2.5 top-0 block h-full w-0.5 rounded-sm bg-black delay-300 duration-200 ease-in-out dark:bg-white ${
-                    !navigationOpen ? "!h-0 delay-[0]" : "h-full"
-                  }`}
-                ></span>
-                <span
-                  className={`delay-400 absolute left-0 top-2.5 block h-0.5 w-full rounded-sm bg-black duration-200 ease-in-out dark:bg-white ${
-                    !navigationOpen ? "!h-0 delay-200" : "h-0.5"
-                  }`}
-                ></span>
+                <span className={`absolute left-2.5 top-0 block h-full w-0.5 rounded-sm bg-black delay-300 duration-200 ease-in-out dark:bg-white ${!navigationOpen ? "!h-0 delay-[0]" : "h-full"}`} />
+                <span className={`delay-400 absolute left-0 top-2.5 block h-0.5 w-full rounded-sm bg-black duration-200 ease-in-out dark:bg-white ${!navigationOpen ? "!h-0 delay-200" : "h-0.5"}`} />
               </span>
             </span>
           </button>
         </div>
 
-        {/* Nav Menu Start */}
         <div
           className={`invisible h-0 w-full items-center justify-between xl:visible xl:flex xl:h-auto xl:w-full ${
             navigationOpen &&
@@ -190,13 +170,8 @@ const Header = () => {
                           </svg>
                         </span>
                       </button>
-
-                      <ul
-                        className={`dropdown ${
-                          dropdownToggler ? "flex" : "hidden"
-                        } absolute left-0 top-full mt-2 space-y-2 rounded-md bg-white p-4 shadow-lg dark:bg-black`}
-                      >
-                        {menuItem.submenu.map((item: { path: string; title: string }, key: number) => (
+                      <ul className={`dropdown ${dropdownToggler ? "flex" : "hidden"} absolute left-0 top-full mt-2 space-y-2 rounded-md bg-white p-4 shadow-lg dark:bg-black`}>
+                        {menuItem.submenu.map((item, key) => (
                           <li key={key} className="hover:text-primary">
                             <Link href={item.path || "#"} onClick={handleLinkClick}>
                               {item.title}
@@ -207,12 +182,8 @@ const Header = () => {
                     </>
                   ) : (
                     <Link
-                      href={`${menuItem.path}`}
-                      className={
-                        isActive(menuItem.path)
-                          ? "text-primary hover:text-primary"
-                          : "hover:text-primary"
-                      }
+                      href={menuItem.path}
+                      className={isActive(menuItem.path) ? "text-primary hover:text-primary" : "hover:text-primary"}
                       onClick={handleLinkClick}
                     >
                       {menuItem.title}
