@@ -92,14 +92,14 @@ const Dashboard = () => {
           <>
             <div>
               <h2 className="text-xl font-semibold mb-4">Your Investments</h2>
-              <Link href="/dashboard/investors/investments" className="text-primary hover:underline">
+              <Link href="/dashboard/investors/" className="text-primary hover:underline">
                 View your investments
               </Link>
             </div>
 
             <div>
               <h2 className="text-xl font-semibold mb-4">Your ROI</h2>
-              <Link href="/dashboard/investors/roi" className="text-primary hover:underline">
+              <Link href="/dashboard/investors/" className="text-primary hover:underline">
                 View your ROI
               </Link>
             </div>
