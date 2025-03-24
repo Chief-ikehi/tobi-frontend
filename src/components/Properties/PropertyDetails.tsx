@@ -63,7 +63,7 @@ const PropertyDetails = ({ propertyId }: PropertyDetailsProps) => {
     customer: {
       email: localStorage.getItem("user_email") || "guest@example.com",
       name: localStorage.getItem("user_name") || "Guest",
-      phone_number: property?.agent?.phone || "", // Ensure this is a valid placeholder
+      phone_number: property?.agent?.phone_number || "+2342348114936955", // Ensure this is a valid placeholder
     },
     customizations: {
       title: "T.O.B.I Booking",
@@ -189,6 +189,7 @@ const PropertyDetails = ({ propertyId }: PropertyDetailsProps) => {
       customer: {
         email: localStorage.getItem("user_email") || "guest@example.com",
         name: localStorage.getItem("user_name") || "Guest",
+        phone_number: property?.agent?.phone_number || "+2348114936955",
       },
       customizations: {
         title: "T.O.B.I Investment",
