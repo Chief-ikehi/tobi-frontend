@@ -74,10 +74,10 @@ const Footer = () => {
                   contact
                 </p>
                 <a
-                  href="#"
+                  href="mailto:contact@usetobi.com"
                   className="text-itemtitle font-medium text-black dark:text-white hover:text-primary dark:hover:text-btndark "
                 >
-                  contact@tobi.com
+                  contact@usetobi.com
                 </a>
               </motion.div>
 
@@ -107,7 +107,7 @@ const Footer = () => {
                   <ul>
                     <li>
                       <a
-                        href="#"
+                        href="/"
                         className="mb-3 inline-block hover:text-primary"
                       >
                         Home
@@ -115,31 +115,31 @@ const Footer = () => {
                     </li>
                     <li>
                       <a
-                        href="#"
+                        href="/properties"
                         className="mb-3 inline-block hover:text-primary"
                       >
-                        Product
+                        Property Search
                       </a>
                     </li>
                     <li>
                       <a
-                        href="#"
+                        href="/about-us"
                         className="mb-3 inline-block hover:text-primary"
                       >
-                        Careers
+                        About Us
                       </a>
                     </li>
                     <li>
                       <a
-                        href="#"
+                        href="/contact"
                         className="mb-3 inline-block hover:text-primary"
                       >
-                        Pricing
+                        Contact Us
                       </a>
                     </li>
                   </ul>
                 </motion.div>
-
+{/*
                 <motion.div
                   variants={{
                     hidden: {
@@ -196,7 +196,7 @@ const Footer = () => {
                       </a>
                     </li>
                   </ul>
-                </motion.div>
+                </motion.div> */}
 
                 <motion.div
                   variants={{
@@ -288,20 +288,14 @@ const Footer = () => {
               className="animate_top"
             >
               <ul className="flex items-center gap-8">
-                <li>
-                  <a href="#" className="hover:text-primary">
+                <li className="hover:text-primary">
                     English
-                  </a>
                 </li>
-                <li>
-                  <a href="#" className="hover:text-primary">
+                <li className="hover:text-primary">
                     Privacy Policy
-                  </a>
                 </li>
-                <li>
-                  <a href="#" className="hover:text-primary">
+                <li className="hover:text-primary">
                     Support
-                  </a>
                 </li>
               </ul>
             </motion.div>
@@ -349,7 +343,7 @@ const Footer = () => {
             >
               <ul className="flex items-center gap-5">
                 <li>
-                  <a href="#" aria-label="social icon">
+                  <a href="https://www.myraderltd.com" aria-label="social icon" target="_blank">
                     <svg
                       className="fill-[#D1D8E0] transition-all duration-300 hover:fill-primary"
                       width="24"
@@ -373,7 +367,7 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#" aria-label="social icon">
+                  <a href="https://www.myraderltd.com" aria-label="social icon" target="_blank">
                     <svg
                       className="fill-[#D1D8E0] transition-all duration-300 hover:fill-primary"
                       width="24"
@@ -397,7 +391,7 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#" aria-label="social icon">
+                  <a href="https://www.myraderltd.com" aria-label="social icon" target="_blank">
                     <svg
                       className="fill-[#D1D8E0] transition-all duration-300 hover:fill-primary"
                       width="24"
@@ -421,7 +415,7 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#" aria-label="social icon">
+                  <a href="https://www.instagram.com/t.o.b.i_ng?igsh=OHZtOW4wMGdrMTBi" aria-label="social icon" target="_blank">
                     <svg
                       className="fill-[#D1D8E0] transition-all duration-300 hover:fill-primary"
                       width="24"

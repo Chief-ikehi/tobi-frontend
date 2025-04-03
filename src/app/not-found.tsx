@@ -6,7 +6,8 @@ export const metadata: Metadata = {
   title: "Error Page",
 
   // other metadata
-  description: "This is Error page for TOBI"
+  description: "This is Error page for TOBI",
+  icons: "/images/tobi-favicon.png"
 };
 
 const NotFound = () => {

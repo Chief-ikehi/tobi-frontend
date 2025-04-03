@@ -4,6 +4,7 @@ import PropertyDetails from "@/components/Properties/PropertyDetails";
 export const metadata: Metadata = {
   title: "Property Details - TOBI",
   description: "View detailed information about this property",
+  icons: "/images/tobi-favicon.png"
 };
 
 type ParamsType = {

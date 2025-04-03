@@ -1,155 +1,135 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
+import { Check } from "lucide-react";
 
-const Details = () => {
+interface MembershipPlan {
+  id: string;
+  name: "SILVER" | "GOLD" | "PLATINUM";
+  price: number;
+  duration: string;
+  features: string[];
+  description: string;
+  isPopular?: boolean;
+}
 
-  const benefits = [
-    {
-      title: "Early Access",
-      icon: "/images/icons/calendar-check.svg",
-      description: "Get priority access to newly listed properties before public release"
-    },
-    {
-      title: "Concierge Support",
-      icon: "/images/icons/headset.svg",
-      description: "24/7 personalized concierge support for all your needs"
-    },
-    {
-      title: "Guaranteed Bookings",
-      icon: "/images/icons/clock-check.svg",
-      description: "Secure your desired property within 30 minutes of selection"
-    }
-  ];
+const membershipPlans: MembershipPlan[] = [
+  {
+    id: "silver",
+    name: "SILVER",
+    price: 50000,
+    duration: "Monthly",
+    description: "Perfect for regular property seekers",
+    features: [
+      "Access to exclusive properties",
+      "Special booking rates",
+      "Priority customer support",
+      "Monthly newsletter",
+      "Early access to new listings",
+    ],
+  },
+  {
+    id: "gold",
+    name: "GOLD",
+    price: 0,
+    duration: "With Investment",
+    description: "Automatic with property investment (60% installment)",
+    features: [
+      "All Silver benefits",
+      "5M credit for short-let stays",
+      "Investment ROI tracking",
+      "Quarterly investment reports",
+      "Dedicated investment advisor",
+      "Property management services",
+    ],
+    isPopular: true,
+  },
+  {
+    id: "platinum",
+    name: "PLATINUM",
+    price: 0,
+    duration: "With Investment",
+    description: "Automatic with outright property purchase",
+    features: [
+      "All Gold benefits",
+      "10M credit for short-let stays",
+      "Priority ROI payments",
+      "Monthly investment reports",
+      "VIP customer support",
+      "Free property management",
+      "Exclusive investment opportunities",
+    ],
+  },
+];
 
-  const membershipTiers = [
-    {
-      name: "Basic",
-      price: "₦50,000/month",
-      features: [
-        "Early access to new properties",
-        "Basic concierge support",
-        "30-minute booking guarantee"
-      ]
-    },
-    {
-      name: "Premium",
-      price: "₦100,000/month",
-      features: [
-        "All Basic features",
-        "24/7 premium concierge support",
-        "Complimentary airport transfers",
-        "Priority booking system"
-      ]
-    },
-    {
-      name: "Elite",
-      price: "₦200,000/month",
-      features: [
-        "All Premium features",
-        "Dedicated personal concierge",
-        "Unlimited car service",
-        "VIP property access",
-        "Exclusive member events"
-      ]
-    }
-  ];
-
+const MembershipPlans = () => {
   return (
-    <>
-      {/* Benefits Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-3xl font-bold md:text-4xl">
-            Exclusive Member Benefits
-          </h2>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={benefit.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="rounded-lg bg-white p-6 text-center shadow-lg"
-              >
-                <div className="mb-4 flex justify-center">
-                  <Image
-                    src={benefit.icon}
-                    alt={benefit.title}
-                    width={48}
-                    height={48}
-                  />
+    <div className="container mx-auto px-4 py-32">
+      <div className="mb-12 text-center">
+        <h1 className="mb-4 text-4xl font-bold text-black dark:text-white">
+          Private Membership
+        </h1>
+        <p className="mx-auto max-w-2xl text-lg text-body-color">
+          Join our exclusive membership program to unlock premium benefits, special rates,
+          and access to exclusive properties.
+        </p>
+      </div>
+
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {membershipPlans.map((plan) => (
+          <div
+            key={plan.id}
+            className={`relative rounded-lg bg-white p-8 shadow-solid-8 transition-all hover:shadow-solid-12 dark:bg-blacksection ${
+              plan.isPopular
+                ? "border-2 border-primary"
+                : "border border-stroke dark:border-strokedark"
+            }`}
+          >
+            {plan.isPopular && (
+              <span className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-primary px-4 py-1 text-sm font-medium text-white">
+                Most Popular
+              </span>
+            )}
+
+            <div className="mb-8">
+              <h3 className="mb-4 text-2xl font-bold text-black dark:text-white">
+                {plan.name}
+              </h3>
+              <p className="mb-6 text-body-color">{plan.description}</p>
+              <div className="mb-6 flex items-end">
+                <span className="text-3xl font-bold text-black dark:text-white">
+                  {plan.price === 0 ? "FREE" : `₦${plan.price.toLocaleString()}`}
+                </span>
+                {plan.price > 0 && (
+                  <span className="ml-1 text-body-color">/{plan.duration.toLowerCase()}</span>
+                )}
+              </div>
+            </div>
+
+            <div className="mb-8 space-y-4">
+              {plan.features.map((feature, index) => (
+                <div key={index} className="flex items-center">
+                  <Check className="mr-3 h-5 w-5 text-primary" />
+                  <span className="text-body-color">{feature}</span>
                 </div>
-                <h3 className="mb-4 text-xl font-semibold">{benefit.title}</h3>
-                <p className="text-gray-600">{benefit.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+              ))}
+            </div>
 
-      {/* Testimonials Section */}
-      <section className="bg-gray-50 py-20">
-        <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-3xl font-bold md:text-4xl">
-            What Our Members Say
-          </h2>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {/* Add testimonial cards here */}
+            <button
+              className={`w-full rounded-lg px-6 py-3 text-center text-base font-medium transition-all ${
+                plan.isPopular
+                  ? "bg-primary text-white hover:bg-primary/90"
+                  : "border border-stroke text-body-color hover:border-primary hover:text-primary dark:border-strokedark"
+              }`}
+            >
+              {plan.name === "GOLD" || plan.name === "PLATINUM"
+                ? "Invest to Access"
+                : "Subscribe Now"}
+            </button>
           </div>
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-3xl font-bold md:text-4xl">
-            Membership Tiers
-          </h2>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            {membershipTiers.map((tier, index) => (
-              <motion.div
-                key={tier.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="rounded-lg bg-white p-6 shadow-lg"
-              >
-                <h3 className="mb-4 text-2xl font-bold">{tier.name}</h3>
-                <p className="mb-6 text-3xl font-semibold text-primary">
-                  {tier.price}
-                </p>
-                <ul className="mb-6 space-y-3">
-                  {tier.features.map((feature) => (
-                    <li key={feature} className="flex items-center">
-                      <svg
-                        className="mr-2 h-5 w-5 text-primary"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <button className="w-full rounded-full bg-primary px-6 py-3 text-white transition-all hover:bg-primary/90">
-                  Select {tier.name}
-                </button>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-    </>
+        ))}
+      </div>
+    </div>
   );
 };
 
-export default Details;
+export default MembershipPlans;

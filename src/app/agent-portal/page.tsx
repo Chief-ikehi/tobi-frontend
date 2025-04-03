@@ -4,10 +4,10 @@ import Details from "@/components/AgentDetails";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-      title: "Agent's Portal Page - TOBI",
+      title: "Agent's Portal Home Page - TOBI",
 
   // other metadata
-  description: "This is the Agent's Portal page for TOBI",
+  description: "This is the Agent's Portal Home page for TOBI",
   icons: "/images/tobi-favicon.png"
 };
 

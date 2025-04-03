@@ -1,113 +1,96 @@
-"use client";
+'use client'
 
-import { motion } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { toast } from "react-hot-toast";
-import axios from "@/lib/axios"; // axios instance with baseURL
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+import api from '@/lib/axios'
+import { toast } from 'react-hot-toast'
 
-const Signin = () => {
-  const router = useRouter();
-  const [data, setData] = useState({ email: "", password: "" });
-  const [loading, setLoading] = useState(false);
+export default function LoginPage() {
+  const router = useRouter()
 
-  const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setLoading(true);
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  try {
-    // Step 1: Login and get tokens
-    const res = await axios.post("/auth/login/", {
-      email: data.email,
-      password: data.password,
-    });
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError('')
+    setLoading(true)
 
-    const { access, refresh } = res.data;
-    localStorage.setItem("access_token", access);
-    localStorage.setItem("refresh_token", refresh);
+    try {
+      const response = await api.post('/auth/login/', { email, password })
+      const { access, refresh } = response.data.tokens
 
-    // Step 2: Use token to fetch user info
-    const profileRes = await axios.get("/auth/user/", {
-      headers: {
-        Authorization: `Bearer ${access}`,
-      },
-    });
+      localStorage.setItem('access_token', access)
+      localStorage.setItem('refresh_token', refresh)
 
-    const user = profileRes.data;
+      toast.success('Login successful', { position: 'top-center', duration: 5000 })
 
-    localStorage.setItem("user_name", user.full_name || "User");
-    localStorage.setItem("user_email", user.email);
-    localStorage.setItem("user_image", user.image || "");
-
-    toast.success("Logged in successfully!", {
-      position: "top-center",
-      duration: 4000,
-      style: { zIndex: 99999 },
-    });
-
-    router.push("/dashboard");
-  } catch (error: any) {
-    console.error(error);
-    toast.error("Invalid credentials", {
-      position: "top-center",
-      duration: 4000,
-      style: { zIndex: 99999 },
-    });
-  } finally {
-    setLoading(false);
+      // Force reload so header picks up new auth state
+      window.location.href = '/dashboard'
+    } catch (err: any) {
+      const message = err?.response?.data?.detail || 'Login failed. Check credentials.'
+      setError(message)
+      toast.error(message, { position: 'top-center' })
+    } finally {
+      setLoading(false)
+    }
   }
-};
 
   return (
-    <section className="pb-12.5 lg:pb-25 lg:pt-20 xl:pb-30 xl:pt-20">
-      <div className="mx-auto max-w-c-1016 px-2">
+    <section className="pb-12.5 lg:pb-25 lg:pt-20 xl:pb-30 xl:pt-20 bg-gray-100 dark:bg-black min-h-screen flex items-center justify-center">
+      <div className="mx-auto max-w-c-1016 px-2 w-full">
         <motion.div
           variants={{
             hidden: { opacity: 0, y: -20 },
             visible: { opacity: 1, y: 0 },
           }}
           initial="hidden"
-          whileInView="visible"
-          transition={{ duration: 1, delay: 0.1 }}
-          viewport={{ once: true }}
-          className="rounded-lg bg-white px-7.5 pt-7.5 shadow-solid-8 dark:border dark:border-strokedark dark:bg-black xl:px-15 xl:pt-15"
+          animate="visible"
+          transition={{ duration: 0.6 }}
+          className="rounded-lg bg-white px-7.5 pt-7.5 pb-10 shadow-lg dark:border dark:border-strokedark dark:bg-black max-w-xl mx-auto"
         >
-          <h2 className="mb-15 text-center text-3xl font-semibold text-black dark:text-white">
+          <h2 className="mb-10 text-center text-3xl font-semibold text-black dark:text-white">
             Login to Your Account
           </h2>
 
-          <form onSubmit={handleSubmit}>
-            <div className="mb-7.5 flex flex-col gap-7.5 lg:flex-row lg:gap-14">
+          {error && (
+            <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
+          )}
+
+          <form onSubmit={handleLogin}>
+            <div className="mb-7.5 flex flex-col gap-7.5">
               <input
                 type="email"
                 placeholder="Email"
-                value={data.email}
-                onChange={(e) => setData({ ...data, email: e.target.value })}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full border-b border-stroke bg-white pb-3.5 dark:border-strokedark dark:bg-black lg:w-1/2"
+                className="w-full border-b border-stroke bg-white pb-3.5 dark:border-strokedark dark:bg-black px-1"
               />
 
               <input
                 type="password"
                 placeholder="Password"
-                value={data.password}
-                onChange={(e) => setData({ ...data, password: e.target.value })}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full border-b border-stroke bg-white pb-3.5 dark:border-strokedark dark:bg-black lg:w-1/2"
+                className="w-full border-b border-stroke bg-white pb-3.5 dark:border-strokedark dark:bg-black px-1"
               />
             </div>
 
-            <div className="flex items-center justify-between">
-              <Link href="/auth/forgot-password" className="hover:text-primary">
+            <div className="flex items-center justify-between mt-5">
+              <Link href="/auth/forgot-password" className="text-sm hover:text-primary">
                 Forgot Password?
               </Link>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="inline-flex items-center gap-2.5 rounded-full bg-black px-6 py-3 font-medium text-white hover:bg-blackho dark:bg-btndark"
+                className="inline-flex items-center gap-2.5 rounded-full bg-black px-6 py-2 font-medium text-white hover:bg-blackho dark:bg-btndark disabled:opacity-70"
               >
                 {loading ? (
                   <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
@@ -129,10 +112,10 @@ const Signin = () => {
               </button>
             </div>
 
-            <div className="mt-12.5 border-t border-stroke py-5 text-center dark:border-strokedark">
-              <p>
-                Don't have an account?{" "}
-                <Link href="/auth/signup" className="text-primary">
+            <div className="mt-10 border-t border-stroke py-5 text-center dark:border-strokedark">
+              <p className="text-sm">
+                Don&apos;t have an account?{' '}
+                <Link href="/auth/signup" className="text-primary font-medium">
                   Sign Up
                 </Link>
               </p>
@@ -141,7 +124,5 @@ const Signin = () => {
         </motion.div>
       </div>
     </section>
-  );
-};
-
-export default Signin;
+  )
+}

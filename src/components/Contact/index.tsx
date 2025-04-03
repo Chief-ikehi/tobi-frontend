@@ -184,22 +184,23 @@ const Contact = () => {
                 </h3>
                 <p>10 Oluwa Rd, Ikoyi, Lagos, Nigeria</p>
               </div>
-              <div className="5 mb-7">
-                <h3 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
-                  Email Address
-                </h3>
-                <p>
-                  <a href="#">contact@tobi.com</a>
-                </p>
-              </div>
-              <div>
-                <h4 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
-                  Phone Number
-                </h4>
-                <p>
-                  <a href="#">+234 811 493 6955</a>
-                </p>
-              </div>
+              <div className="mb-7">
+                  <h3 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
+                    Email Address
+                  </h3>
+                  <p>
+                    <a href="mailto:contact@usetobi.com">contact@usetobi.com</a>
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
+                    Phone Number
+                  </h4>
+                  <p>
+                    <a href="tel:+2348107058644">+234 810 705 8644</a>
+                  </p>
+                </div>
             </motion.div>
           </div>
         </div>

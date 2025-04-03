@@ -1,118 +1,110 @@
-"use client";
+'use client'
 
-import { PropertyType } from "@/types/property";
-import { useState } from "react";
+import { useState } from 'react'
 
 interface PropertyFiltersProps {
   filters: {
-    location: string;
+    location: string
     priceRange: {
-      min: number;
-      max: number;
-    };
-    amenities: string[];
-    propertyType: PropertyType | "ALL";
-  };
-  onFilterChange: (filters: PropertyFiltersProps["filters"]) => void;
+      min: number
+      max: number
+    }
+    amenities: string[]
+    propertyType: 'shortlet' | 'investment' | 'hybrid' | 'all'
+  }
+  onFilterChange: (filters: PropertyFiltersProps['filters']) => void
 }
 
-const LOCATIONS = ["Ikoyi", "Victoria Island"];
+const LOCATIONS = [
+  { label: 'Ikoyi', value: 'ikoyi' },
+  { label: 'Victoria Island', value: 'vi' },
+]
 
 const AMENITIES = [
-  "Swimming Pool",
-  "Gym",
-  "Security",
-  "Parking",
-  "Air Conditioning",
-  "Furnished",
-  "Internet",
-  "Generator",
-];
+  'Swimming Pool',
+  'Gym',
+  'Security',
+  'Parking',
+  'Air Conditioning',
+  'Furnished',
+  'Wi-Fi',
+  'Generator',
+]
 
-const PropertyFilters = ({ filters, onFilterChange }: PropertyFiltersProps) => {
-  const [localFilters, setLocalFilters] = useState(filters);
+export default function PropertyFilters({ filters, onFilterChange }: PropertyFiltersProps) {
+  const [localFilters, setLocalFilters] = useState(filters)
 
   const update = (updates: Partial<typeof filters>) => {
-    const newFilters = { ...localFilters, ...updates };
-    setLocalFilters(newFilters);
-    onFilterChange(newFilters);
-  };
+    const newFilters = { ...localFilters, ...updates }
+    setLocalFilters(newFilters)
+    onFilterChange(newFilters)
+  }
 
-  const handleLocationChange = (location: string) => {
-    update({ location });
-  };
-
-  const handlePriceChange = (type: "min" | "max", value: string) => {
-    const num = value === "" ? (type === "min" ? 0 : 1000000000) : parseInt(value);
+  const handlePriceChange = (type: 'min' | 'max', value: string) => {
+    const num = value === '' ? (type === 'min' ? 0 : 1000000000) : parseInt(value)
     update({
       priceRange: {
         ...localFilters.priceRange,
         [type]: num,
       },
-    });
-  };
+    })
+  }
 
   const handleAmenityToggle = (amenity: string) => {
     const amenities = localFilters.amenities.includes(amenity)
       ? localFilters.amenities.filter((a) => a !== amenity)
-      : [...localFilters.amenities, amenity];
+      : [...localFilters.amenities, amenity]
 
-    update({ amenities });
-  };
-
-  const handlePropertyTypeChange = (type: PropertyType | "ALL") => {
-    update({ propertyType: type });
-  };
+    update({ amenities })
+  }
 
   return (
-    <div className="rounded-lg bg-white p-7.5 shadow-solid-8 dark:border dark:border-strokedark dark:bg-blacksection">
-      <h3 className="mb-7.5 text-xl font-medium text-black dark:text-white">
-        Filter Properties
-      </h3>
+    <div className="rounded-lg bg-white p-6 shadow-md dark:border dark:border-strokedark dark:bg-blacksection">
+      <h3 className="mb-6 text-xl font-medium text-black dark:text-white">Filter Properties</h3>
 
       {/* Property Type Filter */}
-      <div className="mb-7.5">
+      <div className="mb-6">
         <label className="mb-3 block text-sm font-medium text-black dark:text-white">
           Property Type
         </label>
         <div className="flex flex-wrap gap-3">
-          {(["ALL", "SHORTLET", "INVESTMENT", "BOTH"] as (PropertyType | "ALL")[]).map((type) => (
+          {(['all', 'shortlet', 'investment', 'hybrid'] as const).map((type) => (
             <button
               key={type}
-              onClick={() => handlePropertyTypeChange(type)}
+              onClick={() => update({ propertyType: type })}
               className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
                 localFilters.propertyType === type
-                  ? "bg-primary text-white"
-                  : "bg-[#F7F8FA] text-body-color hover:bg-primary hover:text-white dark:bg-dark-2"
+                  ? 'bg-primary text-white'
+                  : 'bg-[#F7F8FA] text-body-color hover:bg-primary hover:text-white dark:bg-dark-2'
               }`}
             >
-              {type === "ALL" ? "All Types" : type === "BOTH" ? "Both" : type.charAt(0) + type.slice(1).toLowerCase()}
+              {type === 'all' ? 'All Types' : type.charAt(0).toUpperCase() + type.slice(1)}
             </button>
           ))}
         </div>
       </div>
 
       {/* Location Filter */}
-      <div className="mb-7.5">
+      <div className="mb-6">
         <label className="mb-3 block text-sm font-medium text-black dark:text-white">
           Location
         </label>
         <select
           value={localFilters.location}
-          onChange={(e) => handleLocationChange(e.target.value)}
+          onChange={(e) => update({ location: e.target.value })}
           className="w-full rounded-lg border border-stroke bg-transparent px-4 py-2 text-body-color outline-none focus:border-primary dark:border-strokedark dark:text-white dark:focus:border-primary"
         >
           <option value="">All Locations</option>
-          {LOCATIONS.map((location) => (
-            <option key={location} value={location}>
-              {location}
+          {LOCATIONS.map((loc) => (
+            <option key={loc.value} value={loc.value}>
+              {loc.label}
             </option>
           ))}
         </select>
       </div>
 
       {/* Price Filter */}
-      <div className="mb-7.5">
+      <div className="mb-6">
         <label className="mb-3 block text-sm font-medium text-black dark:text-white">
           Price Range
         </label>
@@ -120,22 +112,22 @@ const PropertyFilters = ({ filters, onFilterChange }: PropertyFiltersProps) => {
           <input
             type="number"
             placeholder="Min"
-            value={localFilters.priceRange.min || ""}
-            onChange={(e) => handlePriceChange("min", e.target.value)}
+            value={localFilters.priceRange.min || ''}
+            onChange={(e) => handlePriceChange('min', e.target.value)}
             className="w-full rounded-lg border border-stroke bg-transparent px-4 py-2 text-body-color outline-none focus:border-primary dark:border-strokedark dark:text-white dark:focus:border-primary"
           />
           <span className="text-body-color">to</span>
           <input
             type="number"
             placeholder="Max"
-            value={localFilters.priceRange.max === 1000000000 ? "" : localFilters.priceRange.max}
-            onChange={(e) => handlePriceChange("max", e.target.value)}
+            value={localFilters.priceRange.max === 1000000000 ? '' : localFilters.priceRange.max}
+            onChange={(e) => handlePriceChange('max', e.target.value)}
             className="w-full rounded-lg border border-stroke bg-transparent px-4 py-2 text-body-color outline-none focus:border-primary dark:border-strokedark dark:text-white dark:focus:border-primary"
           />
         </div>
       </div>
 
-      {/* Amenities */}
+      {/* Amenities (frontend-only filtering) */}
       <div>
         <label className="mb-3 block text-sm font-medium text-black dark:text-white">
           Amenities
@@ -174,7 +166,5 @@ const PropertyFilters = ({ filters, onFilterChange }: PropertyFiltersProps) => {
         </div>
       </div>
     </div>
-  );
-};
-
-export default PropertyFilters;
+  )
+}

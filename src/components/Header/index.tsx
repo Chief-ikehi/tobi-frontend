@@ -1,78 +1,82 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import ThemeToggler from "./ThemeToggler";
-import menuData from "./menuData";
+import Image from "next/image"
+import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import ThemeToggler from "./ThemeToggler"
+import menuData from "./menuData"
+import axios from "@/lib/axios"
+import { toast } from "react-hot-toast"
 
 const Header = () => {
-  const [navigationOpen, setNavigationOpen] = useState(false);
-  const [dropdownToggler, setDropdownToggler] = useState(false);
-  const [stickyMenu, setStickyMenu] = useState(false);
-  const [user, setUser] = useState<any>(null);
-  const router = useRouter();
-  const pathUrl = usePathname();
+  const [navigationOpen, setNavigationOpen] = useState(false)
+  const [dropdownToggler, setDropdownToggler] = useState(false)
+  const [stickyMenu, setStickyMenu] = useState(false)
+  const [user, setUser] = useState<any>(null)
 
-  const signinButton = () => router.push("/auth/signin");
-  const signupButton = () => router.push("/auth/signup");
+  const router = useRouter()
+  const pathUrl = usePathname()
+
+  const signinButton = () => router.push("/auth/signin")
+  const signupButton = () => router.push("/auth/signup")
 
   const logout = () => {
-    localStorage.clear();
-    setUser(null);
-    router.push("/auth/signin");
-  };
+    localStorage.removeItem("access_token")
+    localStorage.removeItem("refresh_token")
+    toast.success("Signed out successfully", { position: "top-center", duration: 4000 })
+
+    // Force reload so header updates immediately
+    window.location.href = "/auth/signin"
+  }
 
   const handleStickyMenu = () => {
-    if (window.scrollY >= 20) setStickyMenu(true);
-    else setStickyMenu(false);
-  };
+    if (window.scrollY >= 20) setStickyMenu(true)
+    else setStickyMenu(false)
+  }
 
   useEffect(() => {
-    window.addEventListener("scroll", handleStickyMenu);
-    return () => window.removeEventListener("scroll", handleStickyMenu);
-  }, []);
+    window.addEventListener("scroll", handleStickyMenu)
+    return () => window.removeEventListener("scroll", handleStickyMenu)
+  }, [])
 
-  // Load user from localStorage
   useEffect(() => {
-    const loadUser = () => {
-      const token = localStorage.getItem("access_token");
-      const name = localStorage.getItem("user_name");
-      const email = localStorage.getItem("user_email");
-      const image = localStorage.getItem("user_image");
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get("/auth/profile/")
+        const data = res.data
+        setUser({
+          name: data.user.first_name,
+          email: data.user.email,
+          role: data.user.role,
+          dashboard: data.dashboard,
+        })
+      } catch (error) {
+        setUser(null)
+      }
+    }
 
-      if (token) setUser({ name, email, image });
-      else setUser(null);
-    };
-
-    loadUser();
-    window.addEventListener("storage", loadUser);
-    return () => window.removeEventListener("storage", loadUser);
-  }, []);
+    fetchProfile()
+  }, [])
 
   const handleLinkClick = () => {
-    setNavigationOpen(false);
-    setDropdownToggler(false);
-  };
+    setNavigationOpen(false)
+    setDropdownToggler(false)
+  }
 
-  const isActive = (path: string) => pathUrl === path;
+  const isActive = (path: string) => pathUrl === path
 
   const AuthButtons = () => {
     if (user) {
       return (
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            <Link href="/dashboard">
-              <Image
-                src={user.image || "/globe.svg"}
-                alt="User Avatar"
-                width={32}
-                height={32}
-                className="rounded-full transition-transform duration-300 ease-in-out hover:scale-110"
-              />
+            <Link href={user.dashboard || "/dashboard"}>
+              <div className="h-8 w-8 flex items-center justify-center rounded-full bg-primary text-white text-sm font-semibold hover:scale-110 transition-transform">
+                {user.name?.charAt(0).toUpperCase()}
+              </div>
             </Link>
-            <Link href="/dashboard">
+            <Link href={user.dashboard || "/dashboard"}>
               <p className="text-sm">{user.name}</p>
             </Link>
           </div>
@@ -83,7 +87,7 @@ const Header = () => {
             Sign Out
           </button>
         </div>
-      );
+      )
     }
 
     return (
@@ -101,8 +105,8 @@ const Header = () => {
           Sign Up
         </button>
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <header
@@ -131,13 +135,33 @@ const Header = () => {
           >
             <span className="relative block h-5.5 w-5.5 cursor-pointer">
               <span className="absolute right-0 block h-full w-full">
-                <span className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-black delay-[0] duration-200 ease-in-out dark:bg-white ${!navigationOpen ? "!w-full delay-300" : "w-0"}`} />
-                <span className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-black delay-150 duration-200 ease-in-out dark:bg-white ${!navigationOpen ? "delay-400 !w-full" : "w-0"}`} />
-                <span className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-black delay-200 duration-200 ease-in-out dark:bg-white ${!navigationOpen ? "!w-full delay-500" : "w-0"}`} />
+                <span
+                  className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-black delay-[0] duration-200 ease-in-out dark:bg-white ${
+                    !navigationOpen ? "!w-full delay-300" : "w-0"
+                  }`}
+                />
+                <span
+                  className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-black delay-150 duration-200 ease-in-out dark:bg-white ${
+                    !navigationOpen ? "delay-400 !w-full" : "w-0"
+                  }`}
+                />
+                <span
+                  className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-black delay-200 duration-200 ease-in-out dark:bg-white ${
+                    !navigationOpen ? "!w-full delay-500" : "w-0"
+                  }`}
+                />
               </span>
               <span className="du-block absolute right-0 h-full w-full rotate-45">
-                <span className={`absolute left-2.5 top-0 block h-full w-0.5 rounded-sm bg-black delay-300 duration-200 ease-in-out dark:bg-white ${!navigationOpen ? "!h-0 delay-[0]" : "h-full"}`} />
-                <span className={`delay-400 absolute left-0 top-2.5 block h-0.5 w-full rounded-sm bg-black duration-200 ease-in-out dark:bg-white ${!navigationOpen ? "!h-0 delay-200" : "h-0.5"}`} />
+                <span
+                  className={`absolute left-2.5 top-0 block h-full w-0.5 rounded-sm bg-black delay-300 duration-200 ease-in-out dark:bg-white ${
+                    !navigationOpen ? "!h-0 delay-[0]" : "h-full"
+                  }`}
+                />
+                <span
+                  className={`delay-400 absolute left-0 top-2.5 block h-0.5 w-full rounded-sm bg-black duration-200 ease-in-out dark:bg-white ${
+                    !navigationOpen ? "!h-0 delay-200" : "h-0.5"
+                  }`}
+                />
               </span>
             </span>
           </button>
@@ -160,17 +184,19 @@ const Header = () => {
                         className="flex cursor-pointer items-center justify-between gap-3 hover:text-primary"
                       >
                         {menuItem.title}
-                        <span>
-                          <svg
-                            className="h-3 w-3 cursor-pointer fill-waterloo group-hover:fill-primary"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 512 512"
-                          >
-                            <path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
-                          </svg>
-                        </span>
+                        <svg
+                          className="h-3 w-3 cursor-pointer fill-waterloo group-hover:fill-primary"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 512 512"
+                        >
+                          <path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
+                        </svg>
                       </button>
-                      <ul className={`dropdown ${dropdownToggler ? "flex" : "hidden"} absolute left-0 top-full mt-2 space-y-2 rounded-md bg-white p-4 shadow-lg dark:bg-black`}>
+                      <ul
+                        className={`dropdown ${
+                          dropdownToggler ? "flex" : "hidden"
+                        } absolute left-0 top-full mt-2 space-y-2 rounded-md bg-white p-4 shadow-lg dark:bg-black`}
+                      >
                         {menuItem.submenu.map((item, key) => (
                           <li key={key} className="hover:text-primary">
                             <Link href={item.path || "#"} onClick={handleLinkClick}>
@@ -183,7 +209,11 @@ const Header = () => {
                   ) : (
                     <Link
                       href={menuItem.path}
-                      className={isActive(menuItem.path) ? "text-primary hover:text-primary" : "hover:text-primary"}
+                      className={
+                        isActive(menuItem.path)
+                          ? "text-primary hover:text-primary"
+                          : "hover:text-primary"
+                      }
                       onClick={handleLinkClick}
                     >
                       {menuItem.title}
@@ -201,7 +231,7 @@ const Header = () => {
         </div>
       </div>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

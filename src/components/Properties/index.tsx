@@ -1,10 +1,10 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
-import PropertyCard from "./PropertyCard";
-import PropertyFilters from "./PropertyFilters";
-import { Property, PropertyType } from "@/types/property";
-import axios from "@/lib/axios";
+import { useEffect, useState } from "react"
+import PropertyCard from "./PropertyCard"
+import PropertyFilters from "./PropertyFilters"
+import { Property, PropertyType } from "@/types/property"
+import axios from "@/lib/axios"
 
 const Properties = () => {
   const [filters, setFilters] = useState({
@@ -14,65 +14,85 @@ const Properties = () => {
       max: 1000000000,
     },
     amenities: [] as string[],
-    propertyType: "ALL" as PropertyType | "ALL",
-  });
+    propertyType: "all" as PropertyType | "all",
+  })
 
-  const [properties, setProperties] = useState<Property[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [properties, setProperties] = useState<Property[]>([])
+  const [loading, setLoading] = useState(true)
+  const [allProperties, setAllProperties] = useState<Property[]>([])
 
-  const fetchProperties = async (filterOverride?: typeof filters) => {
-    try {
-      setLoading(true);
-      const activeFilters = filterOverride || filters;
-      const queryParams = new URLSearchParams();
+  const applyFilters = (all: Property[], currentFilters = filters) => {
+    return all.filter((property) => {
+      const {
+        location,
+        priceRange: { min, max },
+        amenities,
+        propertyType,
+      } = currentFilters
 
-      // ✅ Location
-      if (activeFilters.location) {
-        queryParams.append("location", activeFilters.location);
+      // Filter by location
+      if (location && property.location.toLowerCase() !== location.toLowerCase()) {
+        return false
       }
 
-      // ✅ Price Range
-      if (activeFilters.priceRange.min > 0) {
-        queryParams.append("min_price", activeFilters.priceRange.min.toString());
-      }
-      if (activeFilters.priceRange.max < 1000000000) {
-        queryParams.append("max_price", activeFilters.priceRange.max.toString());
-      }
-
-      // ✅ Property Type
+      // Filter by property type
       if (
-        activeFilters.propertyType &&
-        activeFilters.propertyType !== "ALL"
+        propertyType !== "all" &&
+        property.property_type.toLowerCase() !== propertyType.toLowerCase()
       ) {
-        queryParams.append("property_type", activeFilters.propertyType);
+        return false
       }
 
-      // ✅ Amenities
-      activeFilters.amenities.forEach((a) =>
-        queryParams.append("amenities", a)
-      );
+      // Filter by price
+      const price = parseFloat(property.price_per_night.toString())
+      if (price < min || price > max) {
+        return false
+      }
 
-      // Final URL
-      const res = await axios.get(`/properties/?${queryParams.toString()}`);
-      setProperties(res.data);
-    } catch (err) {
-      console.error("Error fetching properties:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+      // Filter by amenities
+      if (amenities.length > 0) {
+        const propertyAmenities = property.amenities
+          ? property.amenities.split(',').map((a) => a.trim().toLowerCase())
+          : []
+
+        const allAmenitiesMatch = amenities.every((a) =>
+          propertyAmenities.includes(a.toLowerCase())
+        )
+        if (!allAmenitiesMatch) {
+          return false
+        }
+      }
+
+      return true
+    })
+  }
 
   const handleFilterChange = (newFilters: typeof filters) => {
-    setFilters(newFilters);
-    fetchProperties(newFilters);
-  };
+    setFilters(newFilters)
+    const filtered = applyFilters(allProperties, newFilters)
+    setProperties(filtered)
+  }
+
+  const fetchProperties = async () => {
+    try {
+      setLoading(true)
+      const res = await axios.get('/api/properties/')
+      const all = res.data
+      setAllProperties(all)
+      setProperties(applyFilters(all))
+    } catch (err) {
+      console.error("Error fetching properties:", err)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    fetchProperties();
-  }, []);
+    fetchProperties()
+  }, [])
 
   return (
-    <section className="pb-12.5 pt-32.5">
+    <section className="pb-12.5 pt-10">
       <div className="container">
         <div className="grid grid-cols-12 gap-7.5">
           <div className="col-span-12 lg:col-span-4 xl:col-span-3">
@@ -106,7 +126,7 @@ const Properties = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Properties;
+export default Properties

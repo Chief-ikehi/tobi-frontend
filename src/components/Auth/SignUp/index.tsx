@@ -1,121 +1,105 @@
-"use client";
+'use client'
 
-import { motion } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { toast } from "react-hot-toast";
-import axios from "@/lib/axios"; // your axios instance
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+import api from '@/lib/axios'
+import { toast } from 'react-hot-toast'
 
-const Signup = () => {
-  const router = useRouter();
+export default function RegisterPage() {
+  const router = useRouter()
+
   const [data, setData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    userType: "CUSTOMER",
-  });
-  const [loading, setLoading] = useState(false);
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    role: 'customer',
+  })
 
-  const validateForm = () => {
-    if (!data.firstName || !data.lastName) {
-      toast.error("Please enter your full name");
-      return false;
-    }
-    if (!data.email.includes("@")) {
-      toast.error("Enter a valid email");
-      return false;
-    }
-    if (data.password.length < 8) {
-      toast.error("Password must be at least 8 characters");
-      return false;
-    }
-    if (data.password !== data.confirmPassword) {
-      toast.error("Passwords do not match");
-      return false;
-    }
-    return true;
-  };
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validateForm()) return;
-    setLoading(true);
+    e.preventDefault()
+    setError('')
+
+    if (data.password !== data.confirmPassword) {
+      toast.error('Passwords do not match')
+      return
+    }
+
+    setLoading(true)
 
     try {
-      // 1. Register
-      await axios.post("/auth/register/", {
-        full_name: `${data.firstName} ${data.lastName}`,
+      await api.post('/auth/register/', {
         email: data.email,
         password: data.password,
-        role: data.userType,
-      });
+        first_name: data.firstName,
+        last_name: data.lastName,
+        role: data.role,
+      })
 
-      // 2. Login
-      const loginRes = await axios.post("/auth/login/", {
+      const res = await api.post('/auth/login/', {
         email: data.email,
         password: data.password,
-      });
+      })
 
-      const { access, refresh } = loginRes.data;
-      localStorage.setItem("access_token", access);
-      localStorage.setItem("refresh_token", refresh);
+      const { access, refresh } = res.data.tokens
+      localStorage.setItem('access_token', access)
+      localStorage.setItem('refresh_token', refresh)
 
-      // 3. Get user profile
-      const profileRes = await axios.get("/auth/user/", {
-        headers: {
-          Authorization: `Bearer ${access}`,
-        },
-      });
+      toast.success('Registration successful!', { position: 'top-center' })
 
-      const user = profileRes.data;
-      localStorage.setItem("user_name", user.full_name || "User");
-      localStorage.setItem("user_email", user.email);
-      localStorage.setItem("user_image", user.image || "");
-
-      toast.success("Account created successfully!");
-      router.push("/dashboard");
-    } catch (error: any) {
-      console.error(error);
-      toast.error("Registration failed. Check input and try again.");
+      window.location.href = '/dashboard'
+    } catch (err: any) {
+      const msg =
+        err?.response?.data?.email?.[0] ||
+        err?.response?.data?.password?.[0] ||
+        err?.response?.data?.detail ||
+        'Registration failed'
+      toast.error(msg, { position: 'top-center' })
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   return (
-    <section className="pb-12.5 lg:pb-25 lg:pt-20 xl:pb-30 xl:pt-20">
-      <div className="mx-auto max-w-c-1016 px-2">
+    <section className="pb-12.5 lg:pb-25 lg:pt-20 xl:pb-30 xl:pt-20 bg-gray-100 dark:bg-black min-h-screen flex items-center justify-center">
+      <div className="mx-auto max-w-c-1016 px-2 w-full">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="rounded-lg bg-white px-7.5 pt-7.5 shadow-solid-8 dark:border dark:border-strokedark dark:bg-black xl:px-15 xl:pt-15"
+          className="rounded-lg bg-white px-7.5 pt-7.5 pb-10 shadow-lg dark:border dark:border-strokedark dark:bg-black max-w-xl mx-auto"
         >
-          <h2 className="mb-15 text-center text-3xl font-semibold text-black dark:text-white">
+          <h2 className="mb-10 text-center text-3xl font-semibold text-black dark:text-white">
             Create an Account
           </h2>
+
+          {error && (
+            <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
+          )}
 
           <form onSubmit={handleSubmit}>
             <div className="mb-7.5 flex flex-col gap-7.5 lg:flex-row lg:gap-14">
               <input
                 type="text"
-                placeholder="First name"
+                placeholder="First Name"
                 value={data.firstName}
                 onChange={(e) => setData({ ...data, firstName: e.target.value })}
                 required
-                className="w-full border-b border-stroke bg-white pb-3.5 dark:border-strokedark dark:bg-black lg:w-1/2"
+                className="w-full border-b border-stroke bg-white pb-3.5 dark:border-strokedark dark:bg-black lg:w-1/2 px-1"
               />
               <input
                 type="text"
-                placeholder="Last name"
+                placeholder="Last Name"
                 value={data.lastName}
                 onChange={(e) => setData({ ...data, lastName: e.target.value })}
                 required
-                className="w-full border-b border-stroke bg-white pb-3.5 dark:border-strokedark dark:bg-black lg:w-1/2"
+                className="w-full border-b border-stroke bg-white pb-3.5 dark:border-strokedark dark:bg-black lg:w-1/2 px-1"
               />
             </div>
 
@@ -126,16 +110,16 @@ const Signup = () => {
                 value={data.email}
                 onChange={(e) => setData({ ...data, email: e.target.value })}
                 required
-                className="w-full border-b border-stroke bg-white pb-3.5 dark:border-strokedark dark:bg-black lg:w-1/2"
+                className="w-full border-b border-stroke bg-white pb-3.5 dark:border-strokedark dark:bg-black lg:w-1/2 px-1"
               />
               <select
-                value={data.userType}
-                onChange={(e) => setData({ ...data, userType: e.target.value })}
-                className="w-full border-b border-stroke bg-white pb-3.5 dark:border-strokedark dark:bg-black lg:w-1/2"
+                value={data.role}
+                onChange={(e) => setData({ ...data, role: e.target.value })}
+                className="w-full border-b border-stroke bg-white pb-3.5 dark:border-strokedark dark:bg-black lg:w-1/2 px-1"
               >
-                <option value="CUSTOMER">Customer</option>
-                <option value="AGENT">Agent</option>
-                <option value="INVESTOR">Investor</option>
+                <option value="customer">Customer</option>
+                <option value="agent">Agent</option>
+                <option value="investor">Investor</option>
               </select>
             </div>
 
@@ -146,21 +130,19 @@ const Signup = () => {
                 value={data.password}
                 onChange={(e) => setData({ ...data, password: e.target.value })}
                 required
-                className="w-full border-b border-stroke bg-white pb-3.5 dark:border-strokedark dark:bg-black lg:w-1/2"
+                className="w-full border-b border-stroke bg-white pb-3.5 dark:border-strokedark dark:bg-black lg:w-1/2 px-1"
               />
               <input
                 type="password"
                 placeholder="Confirm Password"
                 value={data.confirmPassword}
-                onChange={(e) =>
-                  setData({ ...data, confirmPassword: e.target.value })
-                }
+                onChange={(e) => setData({ ...data, confirmPassword: e.target.value })}
                 required
-                className="w-full border-b border-stroke bg-white pb-3.5 dark:border-strokedark dark:bg-black lg:w-1/2"
+                className="w-full border-b border-stroke bg-white pb-3.5 dark:border-strokedark dark:bg-black lg:w-1/2 px-1"
               />
             </div>
 
-            <div className="flex items-center justify-between mt-8">
+            <div className="flex flex-col lg:flex-row items-center justify-between mt-8 gap-5">
               <button
                 type="submit"
                 disabled={loading}
@@ -185,8 +167,8 @@ const Signup = () => {
                 )}
               </button>
 
-              <p className="text-black dark:text-white mt-5 lg:mt-0">
-                Already have an account?{" "}
+              <p className="text-black dark:text-white">
+                Already have an account?{' '}
                 <Link href="/auth/signin" className="text-primary hover:underline">
                   Sign in
                 </Link>
@@ -196,7 +178,5 @@ const Signup = () => {
         </motion.div>
       </div>
     </section>
-  );
-};
-
-export default Signup;
+  )
+}
