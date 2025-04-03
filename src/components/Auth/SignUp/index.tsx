@@ -48,6 +48,8 @@ export default function RegisterPage() {
       })
 
       const { access, refresh } = res.data.tokens
+      localStorage.removeItem("access_token")
+      localStorage.removeItem("refresh_token")
       localStorage.setItem('access_token', access)
       localStorage.setItem('refresh_token', refresh)
 

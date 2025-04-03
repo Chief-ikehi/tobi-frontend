@@ -23,6 +23,8 @@ export default function LoginPage() {
     try {
       const response = await api.post('/auth/login/', { email, password })
       const { access, refresh } = response.data.tokens
+      localStorage.removeItem("access_token")
+      localStorage.removeItem("refresh_token")
 
       localStorage.setItem('access_token', access)
       localStorage.setItem('refresh_token', refresh)
