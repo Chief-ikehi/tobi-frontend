@@ -341,7 +341,7 @@ export default function AboutUs() {
             >
               <div className="h-64 bg-gray-300 relative">
                 <img
-                  src="/images/Ikoyi.jpg"
+                  src="/images/IKOYI.jpg"
                   alt="Ikoyi"
                   className="w-full h-full object-cover"
                 />
