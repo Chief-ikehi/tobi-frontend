@@ -10,6 +10,7 @@ import ToasterContext from "./context/ToastContext";
 import { AuthProvider } from "@/contexts/auth-context";
 import NotificationBell from "@/components/Notification/NotificationBell";
 import { useEffect } from "react";
+import { Analytics } from '@vercel/analytics/react'; // Add this import
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -43,6 +44,7 @@ export default function RootLayout({
             </div>
             <Toaster />
             <NotificationBell />
+            <Analytics /> {/* Add the Analytics component here */}
           </AuthProvider>
         </ThemeProvider>
       </body>
