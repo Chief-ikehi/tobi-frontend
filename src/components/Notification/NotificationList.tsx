@@ -14,7 +14,7 @@ interface NotificationListProps {
 export default function NotificationList({ notifications, onClose, refresh }: NotificationListProps) {
   const markAsRead = async (id: number) => {
     try {
-      await axios.post(`/auth/notifications/${id}/mark-as-read/`)
+      await axios.post(`/auth/notifications/${id}/read/`)
       refresh()
     } catch (err) {
       toast.error('Failed to mark notification as read.')
