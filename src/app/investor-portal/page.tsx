@@ -1,6 +1,7 @@
 // app/investor-portal/page.tsx
 import Hero from "@/components/InvestorHero";
 import Details from "@/components/InvestorDetails"
+import InvestorPortalLanding from "@/components/InvestorPortalLanding";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -14,8 +15,7 @@ export const metadata: Metadata = {
 export default function InvestorPortal() {
   return (
     <main>
-    <Hero />
-    <Details />
+    <InvestorPortalLanding />
     </main>
   );
 }

@@ -178,12 +178,6 @@ const Contact = () => {
                 Find us
               </h2>
 
-              <div className="5 mb-7">
-                <h3 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
-                  Our Loaction
-                </h3>
-                <p>10 Oluwa Rd, Ikoyi, Lagos, Nigeria</p>
-              </div>
               <div className="mb-7">
                   <h3 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
                     Email Address
