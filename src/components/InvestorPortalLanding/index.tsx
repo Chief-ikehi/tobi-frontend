@@ -105,7 +105,7 @@ export default function InvestorPortalLanding() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 text-gray-900">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 text-gray-900 dark:text-gray-100">
 
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
@@ -117,18 +117,18 @@ export default function InvestorPortalLanding() {
               variants={fadeIn}
               className="space-y-6"
             >
-              <h1 className="text-4xl md:text-5xl font-bold leading-tight text-gray-900">
-                Unlock <span className="text-blue-700">High-Yield</span> Property Investment Opportunities
+              <h1 className="text-4xl md:text-5xl font-bold leading-tight text-gray-900 dark:text-white">
+                Unlock <span className="text-blue-700 dark:text-blue-400">High-Yield</span> Property Investment Opportunities
               </h1>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-gray-600 dark:text-gray-300">
                 Discover exclusive one-bedroom properties with exceptional returns. T.O.B.I connects you with premium real estate investments tailored for maximum ROI.
               </p>
               <div className="pt-4 flex space-x-4">
-                <button className="bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition-colors duration-200 font-medium flex items-center">
+                <button className="bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors duration-200 font-medium flex items-center">
                   Explore Investments
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </button>
-                <button className="bg-white text-blue-700 px-6 py-3 rounded-lg border border-blue-700 hover:bg-blue-50 transition-colors duration-200 font-medium">
+                <button className="bg-white dark:bg-gray-800 text-blue-700 dark:text-blue-400 px-6 py-3 rounded-lg border border-blue-700 dark:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-200 font-medium">
                   How It Works
                 </button>
               </div>
@@ -140,7 +140,7 @@ export default function InvestorPortalLanding() {
               transition={{ duration: 0.5 }}
               className="relative"
             >
-              <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl dark:shadow-gray-900/30 overflow-hidden">
                 <div className="relative h-64">
                   <img 
                     src={featuredProperties[activeProperty].image} 
@@ -156,22 +156,22 @@ export default function InvestorPortalLanding() {
                     </div>
                   </div>
                 </div>
-                <div className="p-6 bg-white">
+                <div className="p-6 bg-white dark:bg-gray-800">
                   <div className="flex justify-between mb-4">
                     <div>
-                      <p className="text-sm text-gray-500">Investment</p>
-                      <p className="text-xl font-bold text-blue-700">{featuredProperties[activeProperty].price}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Investment</p>
+                      <p className="text-xl font-bold text-blue-700 dark:text-blue-400">{featuredProperties[activeProperty].price}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500">Expected ROI</p>
-                      <p className="text-xl font-bold text-green-600">{featuredProperties[activeProperty].roi}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Expected ROI</p>
+                      <p className="text-xl font-bold text-green-600 dark:text-green-400">{featuredProperties[activeProperty].roi}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500">Occupancy Rate</p>
-                      <p className="text-xl font-bold text-blue-700">{featuredProperties[activeProperty].occupancy}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Occupancy Rate</p>
+                      <p className="text-xl font-bold text-blue-700 dark:text-blue-400">{featuredProperties[activeProperty].occupancy}</p>
                     </div>
                   </div>
-                  <button className="w-full bg-blue-700 text-white py-2 rounded-lg hover:bg-blue-800 transition-colors duration-200 font-medium">
+                  <button className="w-full bg-blue-700 dark:bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-800 dark:hover:bg-blue-700 transition-colors duration-200 font-medium">
                     View Property Details
                   </button>
                 </div>
@@ -183,7 +183,7 @@ export default function InvestorPortalLanding() {
                   <button 
                     key={index}
                     onClick={() => setActiveProperty(index)}
-                    className={`w-3 h-3 rounded-full ${index === activeProperty ? 'bg-blue-700' : 'bg-gray-300'}`}
+                    className={`w-3 h-3 rounded-full ${index === activeProperty ? 'bg-blue-700 dark:bg-blue-500' : 'bg-gray-300 dark:bg-gray-600'}`}
                   />
                 ))}
               </div>
@@ -193,7 +193,7 @@ export default function InvestorPortalLanding() {
       </section>
 
       {/* What We Do Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -202,8 +202,8 @@ export default function InvestorPortalLanding() {
             transition={{ duration: 0.5 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">What We Do</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">What We Do</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               T.O.B.I transforms property investment with data-driven tools, transparent processes, and high-yield opportunities in premium locations.
             </p>
           </motion.div>
@@ -211,17 +211,17 @@ export default function InvestorPortalLanding() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                icon: <Building2 className="h-12 w-12 text-blue-700" />,
+                icon: <Building2 className="h-12 w-12 text-blue-700 dark:text-blue-400" />,
                 title: "Curated Properties",
                 description: "Access exclusive one-bedroom properties in premium locations with high rental demand and growth potential."
               },
               {
-                icon: <TrendingUp className="h-12 w-12 text-blue-700" />,
+                icon: <TrendingUp className="h-12 w-12 text-blue-700 dark:text-blue-400" />,
                 title: "ROI-Focused Analysis",
                 description: "Make informed decisions with our comprehensive financial metrics, market trends, and neighborhood safety data."
               },
               {
-                icon: <Wallet className="h-12 w-12 text-blue-700" />,
+                icon: <Wallet className="h-12 w-12 text-blue-700 dark:text-blue-400" />,
                 title: "Flexible Investment Options",
                 description: "Choose between outright purchase or our installment plan with 60% initial payment and the balance over 2 years."
               }
@@ -232,11 +232,11 @@ export default function InvestorPortalLanding() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-gray-50 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300"
+                className="bg-gray-50 dark:bg-gray-700 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300"
               >
                 <div className="mb-4">{item.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
-                <p className="text-gray-600">{item.description}</p>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{item.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -244,7 +244,7 @@ export default function InvestorPortalLanding() {
       </section>
 
       {/* ROI Calculator Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -254,33 +254,33 @@ export default function InvestorPortalLanding() {
               transition={{ duration: 0.5 }}
               className="space-y-6"
             >
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Calculate Your Investment Returns</h2>
-              <p className="text-lg text-gray-600">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Calculate Your Investment Returns</h2>
+              <p className="text-lg text-gray-600 dark:text-gray-300">
                 See how your investment can grow with our properties. Our calculator gives you transparent projections based on real market data.
               </p>
               
-              <div className="bg-white rounded-xl shadow-md p-6 space-y-4">
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/30 p-6 space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Investment Amount (₦)</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Investment Amount (₦)</label>
                   <div className="relative">
                     <input 
                       type="text" 
                       defaultValue="20,000,000" 
-                      className="w-full p-3 border border-gray-300 bg-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                      className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all dark:text-white"
                     />
-                    <Wallet className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                    <Wallet className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 h-5 w-5" />
                   </div>
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Investment Timeline (Years)</label>
-                  <select className="w-full p-3 border border-gray-300 bg-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
-                    <option selected>2</option>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Investment Timeline (Years)</label>
+                  <select className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all dark:text-white">
+                    <option>2</option>
                     <option>3</option>
-                    </select>
+                  </select>
                 </div>
                 
-                <button className="w-full bg-blue-700 text-white py-3 rounded-lg hover:bg-blue-800 transition-colors duration-200 font-medium">
+                <button className="w-full bg-blue-700 dark:bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-800 dark:hover:bg-blue-700 transition-colors duration-200 font-medium">
                   Calculate Returns
                 </button>
               </div>
@@ -291,43 +291,43 @@ export default function InvestorPortalLanding() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="bg-white rounded-xl shadow-md overflow-hidden"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/30 overflow-hidden"
             >
-              <div className="bg-blue-700 p-6 text-white">
+              <div className="bg-blue-700 dark:bg-blue-800 p-6 text-white">
                 <h3 className="text-xl font-bold">Your Projected Returns</h3>
                 <p className="text-blue-100">Based on average performance of similar properties</p>
               </div>
               
               <div className="p-6 space-y-6">
-                <div className="flex justify-between items-center pb-4 border-b border-gray-200">
+                <div className="flex justify-between items-center pb-4 border-b border-gray-200 dark:border-gray-700">
                   <div>
-                    <p className="text-sm text-gray-500">Initial Investment</p>
-                    <p className="text-2xl font-bold text-gray-900">₦20,000,000</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Initial Investment</p>
+                    <p className="text-2xl font-bold text-gray-900 dark:text-white">₦20,000,000</p>
                   </div>
-                  <TrendingUp className="h-8 w-8 text-blue-700" />
+                  <TrendingUp className="h-8 w-8 text-blue-700 dark:text-blue-400" />
                 </div>
                 
-                <div className="flex justify-between items-center pb-4 border-b border-gray-200">
+                <div className="flex justify-between items-center pb-4 border-b border-gray-200 dark:border-gray-700">
                   <div>
-                    <p className="text-sm text-gray-500">Projected Return</p>
-                    <p className="text-2xl font-bold text-green-600">₦32,000,000</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Projected Return</p>
+                    <p className="text-2xl font-bold text-green-600 dark:text-green-400">₦32,000,000</p>
                   </div>
-                  <BadgePercent className="h-8 w-8 text-green-600" />
+                  <BadgePercent className="h-8 w-8 text-green-600 dark:text-green-400" />
                 </div>
                 
                 <div className="flex justify-between items-center">
                   <div>
-                    <p className="text-sm text-gray-500">Monthly Cash Flow (Est.)</p>
-                    <p className="text-2xl font-bold text-blue-700">₦250,000</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Monthly Cash Flow (Est.)</p>
+                    <p className="text-2xl font-bold text-blue-700 dark:text-blue-400">₦250,000</p>
                   </div>
-                  <BarChart4 className="h-8 w-8 text-blue-700" />
+                  <BarChart4 className="h-8 w-8 text-blue-700 dark:text-blue-400" />
                 </div>
                 
                 <div className="pt-4">
-                  <div className="w-full bg-gray-200 rounded-full h-2.5">
-                    <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: '60%' }}></div>
+                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                    <div className="bg-blue-600 dark:bg-blue-500 h-2.5 rounded-full" style={{ width: '60%' }}></div>
                   </div>
-                  <p className="text-xs text-gray-500 mt-1">Expected ROI: 60% over 2 years</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Expected ROI: 60% over 2 years</p>
                 </div>
               </div>
             </motion.div>
@@ -336,7 +336,7 @@ export default function InvestorPortalLanding() {
       </section>
 
       {/* Featured Investment Opportunities */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -345,8 +345,8 @@ export default function InvestorPortalLanding() {
             transition={{ duration: 0.5 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Investment Opportunities</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Featured Investment Opportunities</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Explore our handpicked selection of high-yield properties in prime locations
             </p>
           </motion.div>
@@ -359,46 +359,46 @@ export default function InvestorPortalLanding() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/20 overflow-hidden hover:shadow-lg transition-shadow duration-300"
               >
                 <div className="relative h-48">
                   <img src={property.image} alt={property.name} className="w-full h-full object-cover" />
-                  <div className="absolute top-3 right-3 bg-blue-700 text-white text-sm font-bold px-2 py-1 rounded">
+                  <div className="absolute top-3 right-3 bg-blue-700 dark:bg-blue-800 text-white text-sm font-bold px-2 py-1 rounded">
                     {property.roi} ROI
                   </div>
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{property.name}</h3>
-                  <p className="text-gray-600 mb-4">{property.location}</p>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{property.name}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">{property.location}</p>
                   
                   <div className="flex justify-between items-center mb-4">
                     <div>
-                      <p className="text-sm text-gray-500">Investment</p>
-                      <p className="text-lg font-bold text-blue-700">{property.price}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Investment</p>
+                      <p className="text-lg font-bold text-blue-700 dark:text-blue-400">{property.price}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500">Expected Return</p>
-                      <p className="text-lg font-bold text-green-600">₦{calculateInvestment(parseInt(property.price.replace(/[^\d]/g, '')) / 1000000)}M</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Expected Return</p>
+                      <p className="text-lg font-bold text-green-600 dark:text-green-400">₦{calculateInvestment(parseInt(property.price.replace(/[^\d]/g, '')) / 1000000)}M</p>
                     </div>
                   </div>
                   
                   <div className="space-y-2 mb-4">
-                    <div className="flex items-center text-sm text-gray-600">
-                      <Clock className="h-4 w-4 mr-2 text-blue-700" />
+                    <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                      <Clock className="h-4 w-4 mr-2 text-blue-700 dark:text-blue-400" />
                       <span>2-year investment period</span>
                     </div>
-                    <div className="flex items-center text-sm text-gray-600">
-                      <Shield className="h-4 w-4 mr-2 text-blue-700" />
+                    <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                      <Shield className="h-4 w-4 mr-2 text-blue-700 dark:text-blue-400" />
                       <span>High neighborhood safety rating</span>
                     </div>
-                    <div className="flex items-center text-sm text-gray-600">
-                      <Calendar className="h-4 w-4 mr-2 text-blue-700" />
+                    <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                      <Calendar className="h-4 w-4 mr-2 text-blue-700 dark:text-blue-400" />
                       <span>{property.occupancy} average occupancy rate</span>
                     </div>
                   </div>
                   
-                  <button className="w-full bg-blue-700 text-white py-2 rounded-lg hover:bg-blue-800 transition-colors duration-200 font-medium flex justify-center items-center">
+                  <button className="w-full bg-blue-700 dark:bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-800 dark:hover:bg-blue-700 transition-colors duration-200 font-medium flex justify-center items-center">
                     View Details
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </button>
@@ -408,7 +408,7 @@ export default function InvestorPortalLanding() {
           </div>
           
           <div className="text-center mt-10">
-            <button className="bg-white text-blue-700 px-6 py-3 rounded-lg border border-blue-700 hover:bg-blue-50 transition-colors duration-200 font-medium inline-flex items-center">
+            <button className="bg-white dark:bg-gray-700 text-blue-700 dark:text-blue-400 px-6 py-3 rounded-lg border border-blue-700 dark:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-600 transition-colors duration-200 font-medium inline-flex items-center">
               View All Properties
               <ArrowRight className="ml-2 h-5 w-5" />
             </button>
@@ -417,7 +417,7 @@ export default function InvestorPortalLanding() {
       </section>
 
       {/* How to Partner With Us */}
-      <section className="py-16 bg-blue-700 text-white">
+      <section className="py-16 bg-blue-700 dark:bg-blue-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -465,9 +465,9 @@ export default function InvestorPortalLanding() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-blue-800 rounded-xl p-6 relative"
+                className="bg-blue-800 dark:bg-blue-900 rounded-xl p-6 relative"
               >
-                <div className="absolute -top-4 -left-4 bg-blue-500 w-10 h-10 rounded-full flex items-center justify-center font-bold">
+                <div className="absolute -top-4 -left-4 bg-blue-500 dark:bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center font-bold">
                   {item.step}
                 </div>
                 <div className="mb-4">{item.icon}</div>
@@ -484,7 +484,7 @@ export default function InvestorPortalLanding() {
             transition={{ duration: 0.5 }}
             className="text-center mt-16"
           >
-            <button className="bg-white text-blue-700 px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors duration-200 font-bold text-lg">
+            <button className="bg-white text-blue-700 dark:text-blue-800 px-8 py-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-100 transition-colors duration-200 font-bold text-lg">
               Start Your Investment Journey
             </button>
           </motion.div>
@@ -492,7 +492,7 @@ export default function InvestorPortalLanding() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -501,8 +501,8 @@ export default function InvestorPortalLanding() {
             transition={{ duration: 0.5 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">What Our Investors Say</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">What Our Investors Say</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Hear from investors who have transformed their portfolios with T.O.B.I
             </p>
           </motion.div>
@@ -515,10 +515,10 @@ export default function InvestorPortalLanding() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-xl p-6 shadow-md relative"
+                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md dark:shadow-gray-900/20 relative"
               >
-                <div className="text-5xl font-serif text-blue-200 absolute top-4 right-6">"</div>
-                <p className="text-gray-600 mb-6 relative z-10">{testimonial.quote}</p>
+                <div className="text-5xl font-serif text-blue-200 dark:text-blue-900 absolute top-4 right-6">"</div>
+                <p className="text-gray-600 dark:text-gray-300 mb-6 relative z-10">{testimonial.quote}</p>
                 <div className="flex items-center">
                   <img 
                     src={testimonial.image} 
@@ -526,8 +526,8 @@ export default function InvestorPortalLanding() {
                     className="w-12 h-12 rounded-full mr-4 object-cover" 
                   />
                   <div>
-                    <h4 className="font-bold text-gray-900">{testimonial.name}</h4>
-                    <p className="text-sm text-gray-500">{testimonial.role}</p>
+                    <h4 className="font-bold text-gray-900 dark:text-white">{testimonial.name}</h4>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{testimonial.role}</p>
                   </div>
                 </div>
               </motion.div>
@@ -537,9 +537,9 @@ export default function InvestorPortalLanding() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-blue-700">
+      <section className="py-16 bg-blue-700 dark:bg-blue-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl dark:shadow-gray-900/30 overflow-hidden">
             <div className="grid md:grid-cols-2">
               <div className="p-12 flex flex-col justify-center">
                 <motion.div 
@@ -549,15 +549,15 @@ export default function InvestorPortalLanding() {
                   transition={{ duration: 0.5 }}
                   className="space-y-6"
                 >
-                  <h2 className="text-3xl font-bold text-gray-900">Ready to Grow Your Investment Portfolio?</h2>
-                  <p className="text-lg text-gray-600">
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Ready to Grow Your Investment Portfolio?</h2>
+                  <p className="text-lg text-gray-600 dark:text-gray-300">
                     Join T.O.B.I today and discover high-yield property investments that align with your financial goals.
                   </p>
                   <div className="pt-4 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <button className="bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition-colors duration-200 font-medium">
+                    <button className="bg-blue-700 dark:bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-800 dark:hover:bg-blue-700 transition-colors duration-200 font-medium">
                       Create Account
                     </button>
-                    <button className="bg-white text-blue-700 px-6 py-3 rounded-lg border border-blue-700 hover:bg-blue-50 transition-colors duration-200 font-medium">
+                    <button className="bg-white dark:bg-gray-700 text-blue-700 dark:text-blue-400 px-6 py-3 rounded-lg border border-blue-700 dark:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-600 transition-colors duration-200 font-medium">
                       Schedule a Consultation
                     </button>
                   </div>
@@ -570,10 +570,10 @@ export default function InvestorPortalLanding() {
                   className="h-full w-full object-cover" 
                 />
                 <div className="absolute inset-0 bg-blue-900/30 flex items-center justify-center">
-                  <div className="bg-white/90 p-6 rounded-xl max-w-xs text-center">
-                    <h3 className="text-xl font-bold text-blue-700 mb-2">Premium Membership</h3>
-                    <p className="text-gray-600 mb-4">Join our exclusive Gold or Platinum membership for early access to prime properties</p>
-                    <button className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors duration-200 font-medium text-sm">
+                  <div className="bg-white/90 dark:bg-gray-800/90 p-6 rounded-xl max-w-xs text-center">
+                    <h3 className="text-xl font-bold text-blue-700 dark:text-blue-400 mb-2">Premium Membership</h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">Join our exclusive Gold or Platinum membership for early access to prime properties</p>
+                    <button className="bg-blue-700 dark:bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-800 dark:hover:bg-blue-700 transition-colors duration-200 font-medium text-sm">
                       Learn More
                     </button>
                   </div>
@@ -585,4 +585,4 @@ export default function InvestorPortalLanding() {
       </section>
     </div>
   );
-};
+}

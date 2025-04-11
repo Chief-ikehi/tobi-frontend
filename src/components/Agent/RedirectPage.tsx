@@ -2,10 +2,9 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import AgentHero from "@/components/AgentHero";
-import Details from "@/components/AgentDetails";
+import AgentPortalLanding from "@/components/AgentPortalLanding";
 
-const AgentPortalLanding = () => {
+const RedirectPage = () => {
   const router = useRouter()
 
   useEffect(() => {
@@ -25,7 +24,7 @@ const AgentPortalLanding = () => {
         const data = await res.json()
         const role = data?.user?.role
 
-        if (role === 'agent') {
+        if (role === 'agent' || role === 'superadmin' || role === 'admin') {
           router.replace('/agent') // redirect if agent
         }
       } catch (err) {
@@ -34,14 +33,13 @@ const AgentPortalLanding = () => {
     }
 
     checkAgentRole()
-  }, [])
+  }, [router])
 
   return (
     <main>
-    <AgentHero />
-    <Details />
+      <AgentPortalLanding />
     </main>
   )
 }
 
-export default AgentPortalLanding
+export default RedirectPage
