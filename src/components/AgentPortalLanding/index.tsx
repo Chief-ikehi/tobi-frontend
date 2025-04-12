@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { toast } from 'react-hot-toast';
 import { 
   Building2, 
   TrendingUp, 
@@ -31,6 +32,18 @@ export default function AgentPortalLanding() {
   const [activeProperty, setActiveProperty] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const router = useRouter();
+  
+  // Commission calculator state
+  const [propertyPrice, setPropertyPrice] = useState("35,000");
+  const [commissionRate, setCommissionRate] = useState(15);
+  const [bookingsPerMonth, setBookingsPerMonth] = useState(10);
+  const [calculatedResults, setCalculatedResults] = useState({
+    perBooking: 5250,
+    monthly: 157500,
+    annual: 1890000,
+    percentage: 75
+  });
+  const [hasCalculated, setHasCalculated] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
@@ -47,27 +60,27 @@ export default function AgentPortalLanding() {
       id: 1,
       name: "Lakeside Villa",
       location: "Victoria Island, Lagos",
-      price: "₦35,000",
+      price: "₦135,000",
       commission: "10%",
-      image: "/api/placeholder/600/400",
+      image: "/images/VI.jpg",
       status: "Available",
     },
     {
       id: 2,
       name: "Ocean View Apartment",
       location: "Ikoyi, Lagos",
-      price: "₦42,000",
+      price: "₦120,000",
       commission: "12%",
-      image: "/api/placeholder/600/400",
+      image: "/images/IKOYI1.jpg",
       status: "Available",
     },
     {
       id: 3,
       name: "Modern Studio",
-      location: "Lekki Phase 1, Lagos",
-      price: "₦28,000",
+      location: "Ikoyi, Lagos",
+      price: "₦128,000",
       commission: "15%",
-      image: "/api/placeholder/600/400",
+      image: "/images/IKOYI.jpg",
       status: "Available",
     },
   ];
@@ -75,21 +88,21 @@ export default function AgentPortalLanding() {
   const testimonials = [
     {
       id: 1,
-      name: "David Okafor",
+      name: "Ikehi Michael",
       role: "Real Estate Agent",
       quote: "The T.O.B.I platform has transformed how I manage properties. The streamlined verification process and easy-to-use interface have helped me increase my client base by 40% in just 3 months.",
       image: "/api/placeholder/80/80"
     },
     {
       id: 2,
-      name: "Amina Ibrahim",
+      name: "Abigail Uraih",
       role: "Property Manager",
       quote: "As a property manager handling multiple listings, T.O.B.I's commission tracking and automated payments have saved me countless hours of administrative work. The platform is truly a game-changer!",
       image: "/api/placeholder/80/80"
     },
     {
       id: 3,
-      name: "Chinedu Eze",
+      name: "Karl Idowu",
       role: "Independent Agent",
       quote: "The ability to showcase my properties to both short-let customers and investors through one platform has dramatically increased my conversion rates. T.O.B.I connects me with serious clients.",
       image: "/api/placeholder/80/80"
@@ -109,6 +122,76 @@ export default function AgentPortalLanding() {
     }
   };
 
+  // Calculation function for commission
+  const calculateCommission = () => {
+    try {
+      console.log("Calculate function called");
+      console.log("Inputs:", { propertyPrice, commissionRate, bookingsPerMonth });
+      
+      // Parse the property price (removing commas)
+      const price = parseFloat(propertyPrice.replace(/,/g, ''));
+      
+      if (isNaN(price) || price <= 0) {
+        toast.error("Please enter a valid property price");
+        return;
+      }
+      
+      // Calculate commission per booking
+      const perBookingCommission = (price * commissionRate) / 100;
+      
+      // Calculate monthly commission (based on average bookings)
+      const monthlyCommission = perBookingCommission * bookingsPerMonth;
+      
+      // Calculate annual commission
+      const annualCommission = monthlyCommission * 12;
+      
+      // Calculate percentage comparison (just for UI purposes)
+      // Assuming average agent earnings on other platforms is around 40% less
+      const percentageHigher = 75;
+      
+      console.log("Calculation results:", {
+        perBooking: perBookingCommission,
+        monthly: monthlyCommission,
+        annual: annualCommission
+      });
+      
+      setCalculatedResults({
+        perBooking: perBookingCommission,
+        monthly: monthlyCommission,
+        annual: annualCommission,
+        percentage: percentageHigher
+      });
+      
+      setHasCalculated(true);
+      toast.success("Commission calculated successfully!");
+    } catch (error) {
+      console.error("Calculation error:", error);
+      toast.error("Error calculating commission");
+    }
+  };
+  
+  // Format number as currency
+  const formatCurrency = (value: number): string => {
+    return new Intl.NumberFormat('en-NG', {
+      style: 'currency',
+      currency: 'NGN',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(value);
+  };
+  
+  // Format input for price (adding commas)
+  const formatPriceInput = (value: string): string => {
+    // Remove non-digit characters
+    const digits = value.replace(/\D/g, '');
+    
+    // Convert to number and format with commas
+    const number = parseInt(digits, 10);
+    if (isNaN(number)) return "";
+    
+    return number.toLocaleString("en-US");
+  };
+  
   const staggerChildren = {
     hidden: { opacity: 0 },
     visible: {
@@ -197,7 +280,8 @@ export default function AgentPortalLanding() {
                       <p className="text-xl font-bold text-blue-700 dark:text-blue-400">{featuredProperties[activeProperty].status}</p>
                     </div>
                   </div>
-                  <button className="w-full bg-blue-700 text-white py-2 rounded-lg hover:bg-blue-800 transition-colors duration-200 font-medium dark:bg-blue-600 dark:hover:bg-blue-700">
+                  <button onClick={() => router.push('/agent/properties/new')}
+                  className="w-full bg-blue-700 text-white py-2 rounded-lg hover:bg-blue-800 transition-colors duration-200 font-medium dark:bg-blue-600 dark:hover:bg-blue-700">
                     List Similar Property
                   </button>
                 </div>
@@ -271,47 +355,71 @@ export default function AgentPortalLanding() {
 
       {/* Commission Calculator Section */}
       <section className="py-16 bg-gray-50 dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="space-y-6"
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="grid md:grid-cols-2 gap-12 items-center">
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="space-y-6"
+      >
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Calculate Your Commission Potential</h2>
+        <p className="text-lg text-gray-600 dark:text-gray-300">
+          See how much you can earn by listing your properties on T.O.B.I. Our commission structure rewards quality listings and successful transactions.
+        </p>
+        
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Property Price Per Night (₦)</label>
+            <div className="relative">
+              <input 
+                type="text" 
+                value={propertyPrice}
+                onChange={(e) => {
+                  const formatted = formatPriceInput(e.target.value);
+                  setPropertyPrice(formatted);
+                }}
+                className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all dark:text-white"
+              />
+              <Wallet className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+            </div>
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Commission Rate (%)</label>
+            <select 
+              value={commissionRate}
+              onChange={(e) => setCommissionRate(parseInt(e.target.value, 10))}
+              className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all dark:text-white"
             >
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Calculate Your Commission Potential</h2>
-              <p className="text-lg text-gray-600 dark:text-gray-300">
-                See how much you can earn by listing your properties on T.O.B.I. Our commission structure rewards quality listings and successful transactions.
-              </p>
-              
-              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Property Price Per Night (₦)</label>
-                  <div className="relative">
-                    <input 
-                      type="text" 
-                      defaultValue="35,000" 
-                      className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all dark:text-white"
-                    />
-                    <Wallet className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-                  </div>
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Commission Rate (%)</label>
-                  <select className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all dark:text-white">
-                    <option>10</option>
-                    <option>12</option>
-                    <option selected>15</option>
-                  </select>
-                </div>
-                
-                <button className="w-full bg-blue-700 text-white py-3 rounded-lg hover:bg-blue-800 transition-colors duration-200 font-medium dark:bg-blue-600 dark:hover:bg-blue-700">
-                  Calculate Earnings
-                </button>
-              </div>
-            </motion.div>
+              <option value="10">10</option>
+              <option value="12">12</option>
+              <option value="15">15</option>
+            </select>
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Average Bookings Per Month</label>
+            <div className="relative">
+              <input 
+                type="number" 
+                value={bookingsPerMonth}
+                onChange={(e) => setBookingsPerMonth(parseInt(e.target.value, 10) || 0)}
+                className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all dark:text-white"
+              />
+              <Calendar className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+            </div>
+          </div>
+          
+          <button 
+            onClick={calculateCommission}
+            className="w-full bg-blue-700 text-white py-3 rounded-lg hover:bg-blue-800 transition-colors duration-200 font-medium dark:bg-blue-600 dark:hover:bg-blue-700"
+          >
+            Calculate Earnings
+          </button>
+        </div>
+      </motion.div>
             
             <motion.div
               initial={{ opacity: 0, x: 20 }}
@@ -319,6 +427,7 @@ export default function AgentPortalLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden"
+              animate={hasCalculated ? { scale: [1, 1.02, 1] } : {}}
             >
               <div className="bg-blue-700 dark:bg-blue-800 p-6 text-white">
                 <h3 className="text-xl font-bold">Your Projected Earnings</h3>
@@ -329,7 +438,7 @@ export default function AgentPortalLanding() {
                 <div className="flex justify-between items-center pb-4 border-b border-gray-200 dark:border-gray-700">
                   <div>
                     <p className="text-sm text-gray-500 dark:text-gray-400">Per Booking Commission</p>
-                    <p className="text-2xl font-bold text-gray-900 dark:text-white">₦5,250</p>
+                    <p className="text-2xl font-bold text-gray-900 dark:text-white">{formatCurrency(calculatedResults.perBooking)}</p>
                   </div>
                   <BadgePercent className="h-8 w-8 text-blue-700 dark:text-blue-400" />
                 </div>
@@ -337,7 +446,7 @@ export default function AgentPortalLanding() {
                 <div className="flex justify-between items-center pb-4 border-b border-gray-200 dark:border-gray-700">
                   <div>
                     <p className="text-sm text-gray-500 dark:text-gray-400">Monthly Earnings (Est.)</p>
-                    <p className="text-2xl font-bold text-green-600">₦157,500</p>
+                    <p className="text-2xl font-bold text-green-600">{formatCurrency(calculatedResults.monthly)}</p>
                   </div>
                   <BarChart4 className="h-8 w-8 text-green-600" />
                 </div>
@@ -345,17 +454,23 @@ export default function AgentPortalLanding() {
                 <div className="flex justify-between items-center">
                   <div>
                     <p className="text-sm text-gray-500 dark:text-gray-400">Annual Earnings (Est.)</p>
-                    <p className="text-2xl font-bold text-blue-700 dark:text-blue-400">₦1,890,000</p>
+                    <p className="text-2xl font-bold text-blue-700 dark:text-blue-400">{formatCurrency(calculatedResults.annual)}</p>
                   </div>
                   <TrendingUp className="h-8 w-8 text-blue-700 dark:text-blue-400" />
                 </div>
-                
+                {/*
                 <div className="pt-4">
                   <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div className="bg-blue-600 dark:bg-blue-500 h-2.5 rounded-full" style={{ width: '75%' }}></div>
+                    <div 
+                      className="bg-blue-600 dark:bg-blue-500 h-2.5 rounded-full" 
+                      style={{ width: `${calculatedResults.percentage}%` }}
+                    ></div>
                   </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">75% higher than average agent earnings on other platforms</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    {calculatedResults.percentage}% higher than average agent earnings on other platforms
+                  </p>
                 </div>
+                */}
               </div>
             </motion.div>
           </div>
@@ -608,7 +723,7 @@ export default function AgentPortalLanding() {
               </div>
               <div className="relative">
                 <img 
-                  src="/api/placeholder/600/400" 
+                  src="/images/IKOYI.jpg" 
                   alt="Luxury apartment" 
                   className="h-full w-full object-cover" 
                 />

@@ -1,5 +1,5 @@
 // app/agent-portal/page.tsx
-import RedirectPage from "@/components/Agent/RedirectPage";
+import AgentPortalLanding from "@/components/AgentPortalLanding";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 };
 
 export default function AgentPortal() {
-  return <RedirectPage />
+  return <AgentPortalLanding />
 }
