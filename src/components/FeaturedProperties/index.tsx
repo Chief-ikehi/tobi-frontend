@@ -9,6 +9,33 @@ import { motion } from "framer-motion"
 const FeaturedProperties = () => {
   const [properties, setProperties] = useState<Property[]>([])
   const [loading, setLoading] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    // Check authentication status
+    const verifyAuth = async () => {
+      const token = localStorage.getItem('access_token')
+      
+      if (!token) {
+        setIsAuthenticated(false)
+        return
+      }
+      
+      try {
+        // Verify token by making a request to the profile endpoint
+        await axios.get('/auth/profile/')
+        setIsAuthenticated(true)
+      } catch (error) {
+        console.error("Authentication failed:", error)
+        // Clear localStorage if authentication fails
+        localStorage.removeItem('access_token')
+        localStorage.removeItem('refresh_token')
+        setIsAuthenticated(false)
+      }
+    }
+    
+    verifyAuth()
+  }, [])
 
   const fetchProperties = async () => {
     try {
@@ -23,8 +50,11 @@ const FeaturedProperties = () => {
   }
 
   useEffect(() => {
-    fetchProperties()
-  }, [])
+    // Only fetch properties after authentication check is complete
+    if (isAuthenticated !== null) {
+      fetchProperties()
+    }
+  }, [isAuthenticated])
 
   return (
     <section className="pb-10 pt-10 px-4 md:px-8 lg:px-12">
