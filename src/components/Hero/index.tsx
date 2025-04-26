@@ -53,10 +53,10 @@ const Hero: React.FC = () => {
       {/* Content */}
       <div className="relative z-10">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 duration-500 dark:text-white">
-        Find Your Perfect Stay
+        Find Your <span className="text-blue-600">Perfect</span> Stay
         </h1>
         <p className="text-xl md:text-2xl font-small mb-8 duration-500 dark:text-white">
-        Discover luxury accommodations tailored to your needs.
+        <span className="text-blue-600">Discover</span> luxury accommodations tailored to your needs.
         </p>
 
         {/* Join Button */}

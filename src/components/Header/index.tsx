@@ -71,12 +71,12 @@ const Header = () => {
       return (
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            <Link href={user.dashboard || "/dashboard"}>
+            <Link href={user.dashboard || "/dashboard"} passHref>
               <div className="h-8 w-8 flex items-center justify-center rounded-full bg-primary text-white text-sm font-semibold hover:scale-110 transition-transform">
                 {user.name?.charAt(0).toUpperCase()}
               </div>
             </Link>
-            <Link href={user.dashboard || "/dashboard"}>
+            <Link href={user.dashboard || "/dashboard"} passHref>
               <p className="text-sm">{user.name}</p>
             </Link>
           </div>
@@ -118,12 +118,12 @@ const Header = () => {
     >
       <div className="relative mx-auto max-w-c-1390 items-center justify-between px-4 md:px-8 xl:flex 2xl:px-0">
         <div className="flex w-full items-center justify-between xl:w-1/4">
-          <Link href="/">
+          <Link href="/" passHref>
             <Image
               src="/images/logo/tobi-logo-dark.svg"
               alt="logo"
-              width={119}
-              height={30}
+              width={110}
+              height={80}
               className="w-full transition-transform duration-300 ease-in-out hover:scale-110"
             />
           </Link>

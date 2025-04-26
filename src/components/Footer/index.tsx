@@ -115,10 +115,10 @@ const Footer = () => {
                     </li>
                     <li>
                       <a
-                        href="/properties"
+                        href="/resources"
                         className="mb-3 inline-block hover:text-primary"
                       >
-                        Property Search
+                        Resources
                       </a>
                     </li>
                     <li>

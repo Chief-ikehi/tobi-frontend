@@ -122,6 +122,7 @@ export default function RegisterPage() {
                 <option value="customer">Customer</option>
                 <option value="agent">Agent</option>
                 <option value="investor">Investor</option>
+                <option value="handyman">Handyman (Service Provider)</option>
               </select>
             </div>
 

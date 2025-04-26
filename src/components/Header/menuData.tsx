@@ -19,18 +19,7 @@ const menuData: Menu[] = [
     newTab: false,
     path: "/about-us",
   },
-  {
-    id: 3,
-    title: "Contact",
-    newTab: false,
-    path: "/contact",
-  },
-  {
-    id: 4,
-    title: "Resources",
-    newTab: false,
-    path: "/resources",
-  },
+  
   {
     id: 5,
     title: "Investor Portal",
@@ -42,6 +31,12 @@ const menuData: Menu[] = [
     title: "Agent Portal",
     newTab: false,
     path: "/agent-portal",
+  },
+  {
+    id: 7,
+    title: "Handyman Portal",
+    newTab: false,
+    path: "/handyman-portal",
   },
 ];
 
